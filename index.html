@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Raj | Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Poppins:wght@300;400;500;600&family=Times+New+Roman&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        manrope: ['Manrope', 'sans-serif'],
+                        dancing: ['Dancing Script', 'cursive'],
+                        poppins: ['Poppins', 'sans-serif'],
+                        times: ['Times New Roman', 'Times', 'serif'],
+                    },
+                    colors: {
+                        dark: '#020617',
+                    },
+                    animation: {
+                        'modal-in': 'modalIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'zoom-in': 'zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'blob': 'move 15s infinite ease-in-out alternate',
+                        'fade-up': 'fadeUp 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        modalIn: {
+                            'from': { opacity: '0', transform: 'translateY(20px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        zoomIn: {
+                            'from': { opacity: '0', transform: 'scale(0.95)' },
+                            'to': { opacity: '1', transform: 'scale(1)' },
+                        },
+                        fadeUp: {
+                            'from': { opacity: '0', transform: 'translateY(10px)' },
+                            'to': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        move: {
+                            '0%': { transform: 'translate(0, 0) scale(1)' },
+                            '33%': { transform: 'translate(50px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-30px, 40px) scale(0.9)' },
+                            '100%': { transform: 'translate(0, 0) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Utilities */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #020617;
+            color: #cbd5e1;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        @media (min-width: 768px) {
+            body, a, button, input, textarea, .cursor-pointer {
+                cursor: none !important;
+            }
+        }
+        
+        .cursor-dot, .cursor-ring {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+        }
+        
+        .cursor-dot { width: 8px; height: 8px; background-color: white; mix-blend-mode: difference; }
+        .cursor-ring { width: 32px; height: 32px; border: 1px solid rgba(255, 255, 255, 0.5); transition: width 0.3s, height 0.3s, background-color 0.3s; z-index: 9998; }
+        .cursor-hover { width: 50px !important; height: 50px !important; background-color: rgba(255, 255, 255, 0.1); border-color: transparent !important; backdrop-filter: blur(2px); }
+        .cursor-active { width: 20px !important; height: 20px !important; background-color: rgba(255, 255, 255, 0.8); }
+        
+        /* Header Shadow */
+        .header-shadow { box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.5); }
+        
+        /* Noise Overlay */
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; opacity: 0.04; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E"); }
+        
+        /* Custom Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.3); }
+
+        /* Utilities */
+        .hidden { display: none; }
+        .block { display: block; }
+        .perspective-1000 { perspective: 1000px; }
+    </style>
+</head>
+<body class="selection:bg-indigo-500 selection:text-white">
+
+    <!-- Custom Cursor Elements -->
+    <div id="cursor-dot" class="cursor-dot hidden md:block"></div>
+    <div id="cursor-ring" class="cursor-ring hidden md:block"></div>
+
+    <!-- Background Blobs -->
+    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-indigo-600 rounded-full blur-[100px] opacity-30 animate-blob" style="animation-delay: 0s;"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-violet-600 rounded-full blur-[100px] opacity-30 animate-blob" style="animation-delay: -4s;"></div>
+        <div class="absolute top-[40%] left-[40%] w-[40vw] h-[40vw] bg-blue-800 rounded-full blur-[100px] opacity-30 animate-blob" style="animation-delay: -8s;"></div>
+    </div>
+    
+    <!-- Noise Texture -->
+    <div class="noise-overlay"></div>
+
+    <!-- Header -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/20 backdrop-blur-sm py-6">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+            <div class="w-1/3">
+                <a href="#" class="text-3xl font-bold font-dancing text-white hover:text-indigo-400 transition-colors cursor-pointer hover-trigger">Rohit Raj</a>
+            </div>
+            <div class="w-1/3 flex justify-center gap-6">
+                <a href="https://www.instagram.com/artistic_rohitraj/" target="_blank" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger"><i data-lucide="instagram" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110"></i></a>
+                <a href="https://www.linkedin.com/in/18rohitraj/" target="_blank" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger"><i data-lucide="linkedin" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110"></i></a>
+                <a href="mailto:18rsquare@gmail.com" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger"><i data-lucide="mail" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110"></i></a>
+            </div>
+            <div class="w-1/3 flex justify-end">
+                <div class="flex items-center gap-0 font-manrope font-medium text-sm text-slate-300"><span class="relative flex h-2.5 w-2.5">
+    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+</span>
+                    <span class="relative flex h-2.5 w-2.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span><span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span></span> Available for work
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+        
+        <!-- Hero Section -->
+        <section class="py-32 flex items-center justify-start px-6 pb-0">
+            <div class="max-w-7xl mx-auto w-full md:pl-10">
+                <h1 class="font-times text-[62px] text-white mb-6 tracking-tight leading-tight cursor-default">
+                    Hey, I'm <span class="font-bold">Rohit Raj</span> <br/>
+                    A Graphic and UI/UX Designer
+                </h1>
+                <p class="font-poppins text-[16px] text-slate-300 mb-8 max-w-4xl leading-relaxed cursor-default">
+                    I'm a passionate Graphic & UI/UX Designer with 1 year of experience in creating impactful visuals. Skilled in Adobe Creative Suite, I design social media layouts, posters, illustrations, and marketing materials that are both aesthetic and purposeful.
+                </p>
+            </div>
+        </section>
+
+        <!-- Case Study Section -->
+        <section class="py-16 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-10"><span className="inline-block text-white font-manrope font-medium mb-4 text-sm cursor-default">• Case Study</span><h2 class="text-[32px] text-white leading-tight max-w-2xl cursor-default" style="font-family: 'Times New Roman', Times, serif;">
+    Some case studies on some projects I've worked on
+</h2></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div onclick="openModal('case-study-modal')" class="group cursor-pointer rounded-3xl border border-white/20 p-4 bg-black/50 hover:bg-black/70 transition-colors duration-300 hover-trigger relative z-10 shadow-lg hover:shadow-indigo-500/20">
+                        <div class="bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl overflow-hidden aspect-[4/3] mb-6 relative w-full flex items-center justify-center"><img src="https://drive.google.com/thumbnail?id=1-_pzQk_eD8mEDntdAg3KTT1gQf2JDIbr&sz=w1000" alt="Referral Reward App Screens" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-500" /></div>
+                        <div class="flex justify-between items-end px-2 pb-2"><h3 class="text-xl font-manrope font-medium text-white max-w-[80%] leading-snug">Referral Reward Flow For Ed. Teach Platform</h3><i data-lucide="arrow-up-right" class="w-6 h-6 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i></div>
+                    </div>
+                    <div class="group rounded-3xl border border-white/10 p-4 bg-black/30 cursor-default opacity-60">
+                        <div class="bg-slate-100/10 rounded-2xl overflow-hidden aspect-[4/3] mb-6 relative w-full flex flex-col items-center justify-center text-center p-6 backdrop-blur-sm"><h4 class="text-slate-300 text-3xl font-bold mb-2 font-manrope tracking-tight">COMING <br/> SOON</h4><p className="text-slate-500 text-sm font-manrope">New UX Case Study <br/> arriving soon.</p></div>
+                        <div class="flex justify-between items-end px-2 pb-2"><h3 class="text-xl font-manrope font-medium text-white/50 max-w-[80%] leading-snug">New UI/UX Case Study arriving soon</h3><i data-lucide="arrow-up-right" class="w-6 h-6 text-white/30"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="py-16 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-10"><span className="inline-block text-white font-manrope font-medium mb-4 text-sm cursor-default">• About Me</span><h2 class="text-[32px] text-white leading-tight cursor-default" style="font-family: 'Times New Roman', Times, serif;">
+    Something little about me
+</h2></div>
+                <div class="w-full rounded-2xl border border-white/20 p-6 md:p-10 relative bg-white/5 backdrop-blur-sm flex flex-col md:flex-row gap-10">
+                    <div class="w-full md:w-1/5 shrink-0 flex flex-col gap-6">
+                        <div class="aspect-[3/4] rounded-2xl overflow-hidden bg-indigo-200"><img src="https://drive.google.com/thumbnail?id=151dQ-eD7oFnOUsCwVSEyzHe79QVIywst&sz=w1000" referrerpolicy="no-referrer" alt="Rohit Raj" class="object-cover w-full h-full" /></div>
+                    </div>
+                    <div class="w-full md:w-4/5 flex flex-col justify-start">
+                        <p class="text-[16px] font-poppins leading-relaxed mb-6 text-slate-300 cursor-default">I'm a Graphic and UI/UX Designer who believes every visual should tell a story and serve a purpose. Over the past 1 year and 8 months, I've been designing meaningful digital experiences that help people learn, grow, and connect from creating engaging visuals in EdTech to shaping mindful interfaces around Mental Health and Life Skills.</p>
+                        <p class="text-[16px] font-poppins leading-relaxed mb-8 text-slate-300 cursor-default">At <span class="font-bold text-white">Sensei</span>, I design user-centered interfaces and visual narratives that transform ideas into intuitive, impactful experiences. My work blends creativity with strategy - combining design thinking, storytelling, and visual harmony to craft designs that not only look beautiful but truly resonate with people.</p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-5 py-2.5 bg-white text-slate-900 rounded-full text-sm font-manrope font-bold shadow-sm cursor-default hover:bg-slate-100 transition-colors hover-trigger whitespace-nowrap">UI</span>
+                            <span class="px-5 py-2.5 bg-white text-slate-900 rounded-full text-sm font-manrope font-bold shadow-sm cursor-default hover:bg-slate-100 transition-colors hover-trigger whitespace-nowrap">UX</span>
+                            <span class="px-5 py-2.5 bg-white text-slate-900 rounded-full text-sm font-manrope font-bold shadow-sm cursor-default hover:bg-slate-100 transition-colors hover-trigger whitespace-nowrap">Graphic Designer</span>
+                            <span class="px-5 py-2.5 bg-white text-slate-900 rounded-full text-sm font-manrope font-bold shadow-sm cursor-default hover:bg-slate-100 transition-colors hover-trigger whitespace-nowrap">Design thinking and strategy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Works Section -->
+        <section class="py-16 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-10"><span className="inline-block text-white font-manrope font-medium mb-4 text-sm cursor-default">• Portfolio</span><h2 class="text-[32px] text-white leading-tight cursor-default" style="font-family: 'Times New Roman', Times, serif;">Some portfolio works</h2></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div onclick="openModal('social-media-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger"><div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100"><img src="https://drive.google.com/thumbnail?id=1EZLhU78DY-kYKN8tzoBCi3FzwVkyNwjj&sz=w1000" alt="Social Media Post" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" /></div><h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">Social Media Post</h3></div>
+                    <div onclick="openModal('print-media-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger"><div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100"><img src="https://drive.google.com/thumbnail?id=1MiJBa3Mlw-C4XJoUr2_LlgTfLyzXcOp2&sz=w1000" alt="Print Media" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" /></div><h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">Print Media</h3></div>
+                    <div onclick="openModal('carousel-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger"><div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100"><img src="https://drive.google.com/thumbnail?id=1IJJ1Nnqrfd4esg3UE2PsazSHH668U7Eg&sz=w1000" alt="Carousel" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" /></div><h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">Social Media Carousel</h3></div>
+                    <div onclick="openModal('video-reel-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger"><div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100"><img src="https://drive.google.com/thumbnail?id=1PLFtetnk2tX8hlGi7Rr41mRBeAcJB1CK&sz=w1000" alt="Video" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" /></div><h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">Video And Reel</h3></div>
+                    
+                    <!-- UI/UX Card Trigger -->
+                    <div onclick="openModal('ui-ux-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger">
+                        <div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100">
+                            <img src="https://drive.google.com/thumbnail?id=1i6HM48dx1WmOxvqv9nM5-OnW-tT7OnXt&sz=w1000" alt="UI" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" />
+                        </div>
+                        <h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">UI/UX Element</h3>
+                    </div>
+
+                    <div onclick="openModal('hobbies-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger"><div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100"><img src="https://drive.google.com/thumbnail?id=1PvKX3AsqeUtMB065JzIM3nV50gT69MIe&sz=w1000" alt="Hobbies" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" /></div><h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">My Hobbies</h3></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-8"><span className="inline-block text-white font-manrope font-medium mb-4 text-sm cursor-default">• Contact</span><h2 class="text-[32px] text-white leading-tight max-w-xl cursor-default" style="font-family: 'Times New Roman', Times, serif;">
+    I'm thrilled that you are here. Let's talk!
+</h2></div>
+                <!-- Updated Contact Card -->
+<a href="mailto:18rsquare@gmail.com" class="block w-full bg-white rounded-2xl py-4 md:py-8 text-center hover:bg-slate-100 transition-colors transform hover:-translate-y-1 duration-300 cursor-pointer hover-trigger">
+    <span class="text-2xl md:text-4xl font-times text-black leading-none break-all">
+        18rsquare@gmail.com
+    </span>
+</a>
+            </div>
+        </section>
+
+        <footer class="py-12 px-6 border-t border-white/10 bg-black/40 backdrop-blur-sm mt-12">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-white font-dancing text-2xl font-bold cursor-default">Rohit Raj</div>
+                <div class="text-slate-500 text-sm font-poppins cursor-default">© 2024 Rohit Raj. All rights reserved.</div>
+                <div class="flex gap-4">
+                     <a href="#" class="text-slate-400 hover:text-white transition-colors cursor-pointer hover-trigger"><i data-lucide="twitter" class="w-5 h-5"></i></a>
+                     <a href="#" class="text-slate-400 hover:text-white transition-colors cursor-pointer hover-trigger"><i data-lucide="github" class="w-5 h-5"></i></a>
+                     <a href="#" class="text-slate-400 hover:text-white transition-colors cursor-pointer hover-trigger"><i data-lucide="dribbble" class="w-5 h-5"></i></a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Case Study Modal -->
+    <div id="case-study-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer" onclick="closeModal('case-study-modal')"></div>
+        <div class="relative w-full max-w-6xl max-h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-modal-in">
+            <div class="overflow-y-auto custom-scrollbar relative h-full">
+                <div class="sticky top-0 right-0 z-50 flex justify-end p-6 pointer-events-none">
+                    <button onclick="closeModal('case-study-modal')" class="pointer-events-auto p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10 shadow-lg"><i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i></button>
+                </div>
+                <div class="px-6 md:px-12 pb-12 -mt-16">
+                    <article class="max-w-4xl mx-auto pt-8">
+                        <h1 class="text-3xl md:text-5xl font-times text-white mb-10 leading-tight mt-8">Case Study: Designing a Referral Flow for an Ed-Tech Platform</h1>
+                        <div class="w-full rounded-2xl overflow-hidden mb-16 border border-white/10 shadow-2xl shadow-black/50">
+                            <img src="https://drive.google.com/thumbnail?id=1dUOTkClAP_fStXhVhxP6mEMYijaIhrMb&sz=w1000" alt="Case Study Hero" class="w-full h-auto object-cover" />
+                        </div>
+                        <section class="mb-16"><h2 class="text-4xl font-times text-white mb-6">Context</h2><p class="text-slate-300 font-poppins leading-relaxed text-lg mb-8">Sensei, an ed-tech platform, wanted to introduce a <strong class="text-white italic">referral program</strong> to increase sign-ups among parents and influencers. The goal was to make the referral process <strong class="text-white italic">simple, transparent, and rewarding</strong>, while aligning with the platform's mission of helping children build emotional and academic growth.</p><div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-b border-white/10 py-8"><div><h3 class="text-white font-manrope font-bold mb-1 italic">Role:</h3><p class="text-slate-400 font-poppins text-sm">UI/UX Designer (sole designer for this feature)</p></div><div><h3 class="text-white font-manrope font-bold mb-1 italic">Timeline:</h3><p class="text-slate-400 font-poppins text-sm">2 Weeks</p></div><div><h3 class="text-white font-manrope font-bold mb-1 italic">Tools:</h3><p class="text-slate-400 font-poppins text-sm">Figma, Illustrator, After Effects</p></div></div></section>
+                        <section class="mb-16"><h2 class="text-4xl font-times text-white mb-6">Problem Statement</h2><div class="bg-white/5 border border-white/5 p-8 rounded-xl backdrop-blur-md"><p class="text-slate-300 font-poppins leading-relaxed mb-6">Sensei, our ed-tech platform, aimed to grow its user base by encouraging <strong class="text-white">parents and influencers</strong> to invite others to join. While the idea of a referral program was clear, the <strong class="text-white">challenge</strong> was how to design a <strong className="text-white">referral flow</strong> that:</p><ol class="list-decimal list-inside text-slate-300 font-poppins space-y-2 ml-2 mb-8"><li>Motivated users with <strong class="text-white">clear, tangible rewards</strong>.</li><li>Worked seamlessly across <strong class="text-white">mobile and desktop</strong>.</li><li>Balanced two different user types.</li><li>Reduced <strong class="text-white">friction in the referral process</strong>.</li></ol><p class="text-slate-300 font-poppins leading-relaxed mb-4">The team had noticed that previous referral attempts on other ed-tech apps often failed because:</p><ul class="list-disc list-inside text-slate-400 font-poppins space-y-2 ml-2 mb-8"><li>Rewards were unclear or delayed.</li><li>Users couldn't track whether their referral was successful.</li><li>The process felt complicated or hidden.</li></ul><div class="mt-8"><h4 class="text-white font-manrope font-bold mb-2">The design challenge:</h4><p class="text-slate-300 font-poppins">How might we create a referral experience that feels <strong class="text-white">simple, transparent, and rewarding</strong>, while aligning with Sensei's mission of building trust with parents and influencers?</p></div></div></section>
+                        <section class="mb-16"><h2 class="text-4xl font-times text-white mb-8">Research</h2><div class="border border-white/20 rounded-xl overflow-hidden mb-12"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">1. User Personas</h3></div><div class="p-6 md:p-8 bg-[#1a1a1a]"><div class="grid grid-cols-1 md:grid-cols-2 gap-10"><div><h4 class="text-lg font-manrope text-white mb-4">Parent Persona</h4><ul class="space-y-4 text-sm font-poppins text-slate-300"><li>• <strong class="text-white">Profile:</strong> 35-year-old mother, working professional, has a 7-year-old child.</li><li>• <strong class="text-white">Motivation:</strong> Wants quality education and emotional learning for her child at affordable costs.</li><li>• <strong class="text-white">Goals:</strong> <ul class="list-disc list-inside ml-4 mt-2 text-slate-400"><li>Access engaging and trustworthy learning platforms.</li><li>Save money while ensuring quality.</li></ul></li><li>• <strong class="text-white">Pain Points:</strong> <ul class="list-disc list-inside ml-4 mt-2 text-slate-400"><li>Confused by complicated referral processes.</li><li>Doesn't trust vague reward systems.</li></ul></li></ul></div><div class="md:border-l md:border-white/10 md:pl-10"><h4 class="text-lg font-manrope text-white mb-4">Influencer Persona</h4><ul class="space-y-4 text-sm font-poppins text-slate-300"><li>• <strong class="text-white">Profile:</strong> 28-year-old content creator, 50k Instagram followers.</li><li>• <strong class="text-white">Motivation:</strong> Recommend credible platforms & build reputation.</li><li>• <strong class="text-white">Goals:</strong> <ul class="list-disc list-inside ml-4 mt-2 text-slate-400"><li>Earn rewards or recognition.</li><li>Easily share referral codes/links.</li></ul></li><li>• <strong class="text-white">Pain Points:</strong> <ul class="list-disc list-inside ml-4 mt-2 text-slate-400"><li>Existing apps don't provide transparent tracking.</li><li>Rewards often feel too small or irrelevant.</li></ul></li></ul></div></div></div></div><div class="border border-white/20 rounded-xl overflow-hidden mb-8"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">Competitive Analysis</h3></div><div class="p-6 bg-[#1a1a1a]"><p class="text-slate-300 font-poppins text-sm mb-4">We studied referral programs of apps like <strong class="text-white">Duolingo, Byju's, and Khan Academy</strong>.</p><ul class="space-y-2 text-sm font-poppins text-slate-300 mb-4"><li>• <strong class="text-white">Strengths Found:</strong> <ul class="list-disc list-inside ml-4 mt-1 text-slate-400"><li>Duolingo: Clear progress tracking.</li><li>Byju's: Monetary discounts.</li></ul></li><li>• <strong class="text-white">Weaknesses Found:</strong> <ul class="list-disc list-inside ml-4 mt-1 text-slate-400"><li>Many hide referral under multiple clicks.</li><li>Rewards delayed.</li></ul></li></ul></div></div><div class="border border-white/20 rounded-xl overflow-hidden"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">Key Insights</h3></div><div class="p-6 bg-[#1a1a1a]"><ul class="space-y-2 text-sm font-poppins text-slate-300"><li>• <strong class="text-white">Transparency builds trust</strong> → users must see status.</li><li>• <strong class="text-white">Immediate gratification</strong> → instant coupon boosts motivation.</li><li>• <strong class="text-white">Ease of sharing</strong> → simple buttons are crucial.</li></ul></div></div></section>
+                        <section class="mb-16"><h2 class="text-4xl font-times text-white mb-8">Design Goals & Solution Approach</h2><div class="border border-white/20 rounded-xl overflow-hidden mb-12"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">Design Goals</h3></div><div class="p-6 bg-[#1a1a1a]"><p class="text-slate-400 font-poppins text-sm mb-4">Based on research insights, we set these goals:</p><ol class="list-decimal list-inside text-slate-300 font-poppins space-y-3 text-sm"><li><strong class="text-white">Simplicity:</strong> 2-3 clicks max.</li><li><strong class="text-white">Transparency:</strong> Clear status tracking.</li><li><strong class="text-white">Motivation:</strong> Instant gratification.</li><li><strong class="text-white">Flexibility:</strong> WhatsApp, Email, Copy Link.</li></ol></div></div><div class="border border-white/20 rounded-xl overflow-hidden mb-12"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">Solution Approach</h3></div><div class="p-6 bg-[#1a1a1a]"><p class="text-slate-400 font-poppins text-sm mb-4">We designed the flow as follows:</p><ol class="list-decimal list-inside text-slate-300 font-poppins space-y-3 text-sm"><li><strong class="text-white">Entry Point:</strong> Prominent "Invite & Earn" CTA.</li><li><strong class="text-white">Referral Generation:</strong> Unique link with one-tap sharing.</li><li><strong class="text-white">Reward Feedback:</strong> Real-time updates on friend joining.</li><li><strong class="text-white">Redemption:</strong> "My Rewards" section for coupons.</li></ol></div></div><div class="w-full rounded-2xl overflow-hidden mb-16 border border-white/10 shadow-2xl shadow-black/50"><img src="https://drive.google.com/thumbnail?id=1-_pzQk_eD8mEDntdAg3KTT1gQf2JDIbr&sz=w1000" alt="Solution" class="w-full h-auto object-cover" /></div><h3 class="text-4xl font-times text-white mb-6">User Flow: Referral Reward Flow</h3><p class="text-slate-400 font-poppins text-sm mb-8">We have <strong class="text-white">two main user types: Parents</strong> and <strong class="text-white">Influencers</strong>.</p><div class="space-y-8"><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 1: Discover</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Parent sees CTA on dashboard.</p></div></div><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 2: Share</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Tap to open share options.</p></div></div><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 3: Friend Joins</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Friend clicks link and signs up.</p></div></div><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 4: Reward</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Instant notification of reward.</p></div></div><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 5: Redeem</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Coupon applied at checkout.</p></div></div></div>
+                        <div class="text-center pb-8 border-t border-white/10 pt-8 mt-12"><p class="text-slate-500 font-poppins text-sm">End of Case Study</p></div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UI/UX Element Modal (Staggered Masonry) -->
+    <div id="ui-ux-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer" onclick="closeModal('ui-ux-modal')"></div>
+        <div class="relative w-full max-w-7xl h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
+            <!-- Close Button -->
+            <div class="sticky top-0 right-0 z-50 flex justify-end p-6 pointer-events-none">
+                <button onclick="closeModal('ui-ux-modal')" class="pointer-events-auto p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10 shadow-lg">
+                    <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i>
+                </button>
+            </div>
+            <div class="overflow-y-auto custom-scrollbar p-6 md:p-10 -mt-10">
+                <h2 class="text-3xl font-times text-white mb-8 text-left">UI/UX Elements & Components</h2>
+                <div class="columns-1 sm:columns-2 lg:columns-4 gap-6 space-y-6" id="ui-ux-grid">
+                    <!-- JS Injected -->
+                </div>
+                <div class="mt-12 text-center text-slate-500 font-poppins text-sm pb-8">
+                    A collection of interfaces, components, and design systems.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Media Masonry Modal -->
+    <div id="social-media-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer" onclick="closeModal('social-media-modal')"></div>
+        <div class="relative w-full max-w-7xl h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
+            <!-- Scrollable Area -->
+            <div class="overflow-y-auto custom-scrollbar relative">
+                <!-- Close Button -->
+                <div class="sticky top-0 right-0 z-50 flex justify-end p-6 pointer-events-none">
+                    <button onclick="closeModal('social-media-modal')" class="pointer-events-auto p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10 shadow-lg">
+                        <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i>
+                    </button>
+                </div>
+                
+                <div class="p-6 md:p-10 -mt-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6" id="social-media-grid"></div>
+                    <div class="mt-12 text-center text-slate-500 font-poppins text-sm pb-8">
+                        A curation of impactful social media creatives designed for engagement.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-black/95 p-4 animate-in fade-in duration-200" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors cursor-pointer z-[260] group border border-white/10" onclick="closeLightbox()">
+            <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform"></i>
+        </button>
+        <div class="relative max-w-full max-h-[90vh] aspect-[4/5] h-full" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Full View" class="w-full h-full object-contain rounded-lg shadow-2xl animate-in zoom-in-95 duration-300" />
+        </div>
+    </div>
+
+    <!-- Social Media Carousel Modal (Cover Flow) -->
+    <div id="carousel-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer" onclick="closeModal('carousel-modal')"></div>
+        <div class="relative w-full max-w-6xl h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 border-b border-white/5 bg-[#0f0f0f]/90 backdrop-blur-sm sticky top-0 z-50">
+                <h2 class="text-2xl font-times text-white">Social Media Carousels</h2>
+                <button onclick="closeModal('carousel-modal')" class="p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10">
+                    <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i>
+                </button>
+            </div>
+
+            <!-- Content -->
+            <div class="overflow-y-auto custom-scrollbar p-6 md:p-10 flex flex-col items-center">
+                <div id="carousel-rows-container" class="w-full"></div>
+                <div class="mt-8 text-slate-500 font-poppins text-sm pb-8">
+                    Swipe or click to navigate through the carousel slides.
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Print Media Modal -->
+    <div id="print-media-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer" onclick="closeModal('print-media-modal')"></div>
+        <div class="relative w-full max-w-7xl h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
+            <div class="overflow-y-auto custom-scrollbar relative">
+                <div class="sticky top-0 right-0 z-50 flex justify-end p-6 pointer-events-none">
+                    <button onclick="closeModal('print-media-modal')" class="pointer-events-auto p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10 shadow-lg">
+                        <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i>
+                    </button>
+                </div>
+                <div class="px-6 md:px-10 pb-10 pt-1 -mt-10">
+                    <h2 class="text-3xl font-times text-white mb-8 text-left">Print Media</h2>
+                    <div class="columns-1 sm:columns-2 lg:columns-4 gap-4 md:gap-6 space-y-4 md:space-y-6" id="print-media-grid"></div>
+                    <div class="mt-12 text-center text-slate-500 font-poppins text-sm pb-8">
+                        High-impact print and digital collateral designed for events and promotions.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video and Reel Modal (Cover Flow Style) -->
+    <div id="video-reel-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer" onclick="closeModal('video-reel-modal')"></div>
+        <div class="relative w-full max-w-6xl h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
+            <div class="sticky top-0 right-0 z-50 flex justify-end p-6 pointer-events-none">
+                <button onclick="closeModal('video-reel-modal')" class="pointer-events-auto p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10 shadow-lg">
+                    <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i>
+                </button>
+            </div>
+            <div class="overflow-y-auto custom-scrollbar p-6 md:p-10 flex flex-col items-center -mt-10">
+                <h2 class="text-3xl font-times text-white mb-12 text-center">Video & Reels</h2>
+                <div id="video-carousel-container" class="w-full"></div>
+                <div class="mt-8 text-slate-500 font-poppins text-sm pb-8 text-center">Click on a reel to bring it to focus.</div>
+            </div>
+        </div>
+    </div>
+    <!-- Video Player Lightbox -->
+<div id="video-lightbox" class="fixed inset-0 z-[250] hidden flex items-center justify-center bg-black/95 p-4 animate-in fade-in duration-200">
+    <!-- Backdrop to close -->
+    <div class="absolute inset-0" onclick="closeVideoPlayer()"></div>
+    
+    <!-- Close Button -->
+    <button class="absolute top-6 right-6 p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors cursor-pointer z-[260] group border border-white/10" onclick="closeVideoPlayer()">
+        <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform"></i>
+    </button>
+
+    <!-- Video Container (Responsive) -->
+    <div class="relative w-full max-w-5xl h-[80vh] bg-black rounded-xl overflow-hidden shadow-2xl z-[255] flex items-center justify-center">
+        <iframe id="video-iframe" class="w-full h-full" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+</div>
+<!-- Hobbies Modal (Masonry with YouTube Support) -->
+<div id="hobbies-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer" onclick="closeModal('hobbies-modal')"></div>
+    <div class="relative w-full max-w-6xl h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
+        <!-- Close Button -->
+        <div class="sticky top-0 right-0 z-50 flex justify-end p-6 pointer-events-none">
+            <button onclick="closeModal('hobbies-modal')" class="pointer-events-auto p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10 shadow-lg">
+                <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i>
+            </button>
+        </div>
+
+        <div class="overflow-y-auto custom-scrollbar p-6 md:p-10 -mt-10">
+            <h2 class="text-3xl font-times text-white mb-8 text-left">My Hobbies</h2>
+            
+            <!-- Masonry Container -->
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6" id="hobbies-grid">
+                <!-- Content Injected via JS -->
+            </div>
+
+            <div class="mt-12 text-center text-slate-500 font-poppins text-sm pb-8">
+                A glimpse into my world outside of design.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- YouTube Player Overlay -->
+<div id="youtube-lightbox" class="fixed inset-0 z-[260] hidden flex items-center justify-center bg-black/95 p-4 animate-in fade-in duration-200">
+    <div class="absolute inset-0" onclick="closeYouTubePlayer()"></div>
+    <button class="absolute top-6 right-6 p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors cursor-pointer z-[270] group border border-white/10" onclick="closeYouTubePlayer()">
+        <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform"></i>
+    </button>
+    <div class="relative w-full max-w-4xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl z-[265]">
+        <iframe id="youtube-iframe" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</div>
+
+    <!-- Scripts -->
+    <script>
+        // --- Data ---
+        const socialImages = [
+            "https://drive.google.com/thumbnail?id=1_hMWFmDEhyxAtKJeuWRG-Xyf1EACusSt&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1DPotuVs7suTuiuCBxHIiPviFFAj5_P-f&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1MCYuuenglhmQVAmqW_2y9fk6Pb-WzZa0&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1WlrRiBe3a1NQdMT8a0ftQzDjzBech08y&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1IRjfjTtoCp9UMzcNNbqMI3yUo8SnGW46&sz=w1000",
+            "https://drive.google.com/thumbnail?id=137ZJ9uFoUdebyjmm-36nPY8cYw3Tp95r&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1X5Z56cUITg-i1ZrgwxbEYB-hfx1XqT6r&sz=w1000",
+            "https://drive.google.com/thumbnail?id=14tk9EkkJKifz_idpu7j942cxHpWI8MlJ&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1WKKPwzaKnXpvNylXHvlooK4x2eHb_7OR&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1QGSg6OjpZZCFFt_HbFODiygUJNdP8U2F&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1TsaGRcpqQ2vNAqnlKCQoAXj3G86ARz0O&sz=w1000"
+        ];
+        
+        const uiUxImages = [
+            "https://drive.google.com/thumbnail?id=1LKxRkXs2pb7W1cbAmiEqCtNLjl8AcAWr&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1LN0E5RWoLHX8iYRi4pWf0A-0ULZPYeOp&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1NvBYBNSYJTKOR80bZfyOUhJ3yEhsxA9v&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1_VUUusKLEe0bOMOaZhD9qXrpWX6klX1W&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1Ak5094zUoUGwWt59n1WUPNYPJ9x7RucO&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1e-j1dtXztP08pTIYOHXG5GNK8_MFpimh&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1RahiFJ59mUi68Q1N71Ta0oE7M1y1bsGX&sz=w1000",
+            "https://drive.google.com/thumbnail?id=19zkyjTYAxrlQa2Zd6Z6s15tDF9CXEAA5&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1wgb1ZqWC478Y4mBPgyS2680Ekv_StGay&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1VkhSy_5UWGu-r1qdDAoe7L_5mtRP93H9&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1UeThJNO9ZdpjPjyRgLgFKxfi0rHpYWHJ&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1A2dVCJEbKn5XIi5aUCh1sgJX-zBSs2U0&sz=w1000",
+            "https://drive.google.com/thumbnail?id=18FG9zFFlEOSiOB8rXJBMyFq60xD2a7WP&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1bt__stRRjVoeE64_jZRscOdAK0DghRoC&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1lQmGZ3ho4BClJEEdm8AQuIQxxqCS2TNE&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1zWmproAquerdhzoE807VgxJjxH4POLLJ&sz=w1000"
+        ];
+
+        const educationalSeries = [
+            "https://drive.google.com/thumbnail?id=1fD94-kOwsAkZtkRdaV8jMRpwrOUJz69u&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1Z_Q49KAioM8zphiDx5f-IKR3UKKU28RC&sz=w1000",
+            "https://drive.google.com/thumbnail?id=19uNzE9UxFaIYEv8ieqFilZEwfy9hWJVi&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1mcEntsym6RmT8nK-Hl27cuXAAuW8gI15&sz=w1000",
+        ];
+
+        const promotionalSeries = [
+            "https://drive.google.com/thumbnail?id=1hKmDr8N3WvqM2zatGZO4n9w3lM7wwgxl&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1G0CDetkvc6KSIFcjiJpr4ETfgM95og7P&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1d2oOIqHPeT35cEHbYA44K-ouPkldb6-Q&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1Ww8M1lLpASmVL5_epVLcJf8f1-NDC8x8&sz=w1000",
+        ];
+        const thirdSeries = [
+            "https://drive.google.com/thumbnail?id=1wapdbtPekkIjl7ocXIkBT8ZmWOmEYQIg&sz=w1000",
+            "https://drive.google.com/thumbnail?id=12bva_9leDulX7yHA7XoPEpNeHmIhPz8s&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1mCryQs5N5Nq3_pwbKdHMz2Ru-i-a4572&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1ig4qfKixKUraHD23oG_k6swHMN4TNXK9&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1x4EWMkyzxsO74Lh79YvAo--ZLrlInU5Z&sz=w1000",
+        ];
+
+        const printMediaImages = [
+        "https://drive.google.com/thumbnail?id=1w2iDZG41dof-GlzLkgCiavrRBVCFfl0x&sz=w1000",
+        "https://drive.google.com/thumbnail?id=1ji2AahgMBXQCr2xsfeNKTKnrpYKmH8OW&sz=w1000",
+        "https://drive.google.com/thumbnail?id=1kZFl5Alu3F6K5OFBRzKiJwb61Pz-F6rs&sz=w1000",
+        "https://drive.google.com/thumbnail?id=1nAlWututrwviQnH4kuANYYa9rrYbkMqC&sz=w1000"
+        
+        ];
+        
+        const videoReels = [
+        "https://drive.google.com/thumbnail?id=1t5TipxiSx9CdOra69QwFEh48oeOuBm2n&sz=w1000",
+        "https://drive.google.com/thumbnail?id=10BnKVG0AMepWr-s3PD13TEtYgxyaoo7s&sz=w1000",
+        "https://drive.google.com/thumbnail?id=1JGQdYyKJOv7ozuWOu9VE1F1NXkrOGaPw&sz=w1000",
+        "https://drive.google.com/thumbnail?id=1Q41JHlsMI-RXHATMsgst6ee6Vjcys6-I&sz=w1000",
+        "https://drive.google.com/thumbnail?id=1VSkvi8rCTkyjGPyXjiep_B-_76UPCscI&sz=w1000",
+        ];
+
+        const hobbiesData = [
+        { src: 'https://drive.google.com/thumbnail?id=17hKyzkOyfANStgH2klCsS8EHSWkMc-_W&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1lfBXm52XZOAbLLBJPJmUctBcW5nMlv7t&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1Njt2YL8LkngYv2c3Fu5DjRwq88vhxdzV&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1HrAiHxuZVgI6zxAu5pHm32Jyzq2dCUhf&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=17ijrE8riH1Q4yX-Oh_iCKAtvGCgzFO5L&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1mztJnN0Ge7cNyc-vWExE7uzATRHrxG13&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1P-2J7SPuBxNhGTqUTasWxnJaxVmRDlmh&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1VwId8Y3YPPlskQkwtJYuyUNzIU-RmfUn&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1DUB9UYGkFwpwb8d8dfnoAWOL-4jpbWqD&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1Af1T6annHHaIhHQB3v-xkbyRRQPiQBvX&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1SWpmqcGW9lDRdaDTR9mQwuKpHW8QJR7L&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1A0Unh-hn1GUHw-jeDN4xebgbHpNpbCdT&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1A-Phgg83kItCvOmuXibg7Hr_DU8PLyo9&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1aKdBpZY1q8ObyKKlrCmR7BCx8HiNGKgt&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1tPEPxZnCbgWC362ht3_rGK0KjKN7BFqA&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1HIJ_FZI9VPhQUV88cNpL2RVFnd1oydNs&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1ruUh1eNmWtYsZ_xiUTozMgRBzuEqG2iL&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1bZ00eFwAoHq-wBbWbRFpX9bSANxq3BMy&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1JDRL3fL_vC6HoJUMxMYLIwEy1Qu9kBUk&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1gUg_LaiixSz4KcCWVcmZT-rGUkLNESBY&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1xWLEx9iu3DEt-hRA_Wv9xnUDy4XZ59P3&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1nxYNf3-W80HUcI_wR79HfGWYc6Yi_iMm&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1Ft484uVhiFmsmcJ4caIYVkcEcmutDj7U&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1iNrCXRcP-dKNJ6umSJmx-bDojpVmBx79&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1t7HfQjWhSmWtjlSg_RaJx01TPHTU1tHC&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1s7hKwqSHn3zE4AUYllcyisOYdOQqYzv7&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1Y4unXu6ugvsvBE1LkCfeZ9QrCgR7F2cp&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1QRx5tmDFnU9-nX8eI3Cj3b6AWgG4zG3b&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1st5_Fm9Caf1mBlvpk7dJTEBA1ptACqWO&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1_q1iop0PckuMG87wMxS6epbOC-4mn4mn&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1Y9UcToCYdmkNh85ylqya8XfFAyBi2pnY&sz=w1000' },
+        { src: 'https://drive.google.com/thumbnail?id=1TLnHq6UeSCMrffbajlLzokrl91N_M-nZ&sz=w1000' },
+    
+];
+        // --- Init ---
+        lucide.createIcons();
+
+        // --- Cursor Logic ---
+        const cursorDot = document.getElementById('cursor-dot');
+        const cursorRing = document.getElementById('cursor-ring');
+        let mouseX = 0, mouseY = 0;
+        let ringX = 0, ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+        });
+
+        function animateCursor() {
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            cursorRing.style.left = ringX + 'px';
+            cursorRing.style.top = ringY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest('a, button, .hover-trigger, .cursor-pointer')) {
+                cursorRing.classList.add('cursor-hover');
+            }
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest('a, button, .hover-trigger, .cursor-pointer')) {
+                cursorRing.classList.remove('cursor-hover');
+            }
+        });
+        document.addEventListener('mousedown', () => cursorRing.classList.add('cursor-active'));
+        document.addEventListener('mouseup', () => cursorRing.classList.remove('cursor-active'));
+
+        // --- Header Scroll ---
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('bg-black/40', 'header-shadow', 'py-4');
+                header.classList.remove('bg-black/20', 'py-6');
+            } else {
+                header.classList.remove('bg-black/40', 'header-shadow', 'py-4');
+                header.classList.add('bg-black/20', 'py-6');
+            }
+        });
+
+        // --- Modal Functions ---
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+                header.classList.add('hidden'); // Hide header when modal is open
+                
+                if (id === 'social-media-modal') initSocialMediaGrid();
+                if (id === 'carousel-modal') initCarousels();
+                if (id === 'print-media-modal') initPrintMediaGrid();
+                if (id === 'video-reel-modal') initVideoReelCarousel();
+                if (id === 'ui-ux-modal') initUiUxGrid();
+                if (id === 'hobbies-modal') initHobbiesGrid();
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                document.body.style.overflow = '';
+                header.classList.remove('hidden'); // Show header
+            }
+        }
+
+        // --- Grid Initializers ---
+        function initSocialMediaGrid() {
+            const container = document.getElementById('social-media-grid');
+            if (container.children.length > 0) return;
+
+            socialImages.forEach((src) => {
+                createGridItem(container, src, "Post");
+            });
+            lucide.createIcons();
+        }
+        
+        function initPrintMediaGrid() {
+            const container = document.getElementById('print-media-grid');
+            if (container.children.length > 0) return;
+
+            printMediaImages.forEach((src) => {
+                createGridItem(container, src, "Design");
+            });
+            lucide.createIcons();
+        }
+
+        function initUiUxGrid() {
+            const container = document.getElementById('ui-ux-grid');
+            if (container.children.length > 0) return;
+
+            uiUxImages.forEach((src) => {
+                // Using masonry wrapper
+                const div = document.createElement('div');
+                div.className = 'group relative rounded-xl overflow-hidden cursor-pointer hover-trigger border border-white/10 bg-white/5 shadow-lg break-inside-avoid mb-6 animate-fade-up';
+                div.onclick = () => openLightbox(src);
+                div.innerHTML = `
+                    <img src="${src}" alt="UI/UX" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                         <div class="p-3 bg-white/10 backdrop-blur-md rounded-full"><i data-lucide="zoom-in" class="w-6 h-6 text-white"></i></div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+            lucide.createIcons();
+        }
+        // PASTE THESE FUNCTIONS AT THE BOTTOM OF YOUR SCRIPT
+
+// 1. Initialize the Grid
+function initHobbiesGrid() {
+    const container = document.getElementById('hobbies-grid');
+    if (container.children.length > 0) return;
+
+    hobbiesData.forEach((item) => {
+        const div = document.createElement('div');
+        div.className = 'group relative rounded-xl overflow-hidden cursor-pointer hover-trigger border border-white/10 bg-white/5 shadow-lg break-inside-avoid mb-6';
+        
+        // Simplified: Always treats item as an image
+        div.onclick = () => openLightbox(item.src);
+        div.innerHTML = `
+            <img src="${item.src}" alt="Hobby" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-105">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div class="p-3 bg-white/10 backdrop-blur-md rounded-full"><i data-lucide="zoom-in" class="w-6 h-6 text-white"></i></div>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+    lucide.createIcons();
+}
+
+        // Helper for standard grids
+        function createGridItem(container, src, label) {
+             const div = document.createElement('div');
+                // Removed 'aspect-[4/5]' and added 'mb-6 break-inside-avoid' for true masonry behavior
+div.className = 'group relative rounded-xl overflow-hidden cursor-pointer hover-trigger border border-white/10 bg-white/5 shadow-lg mb-6 break-inside-avoid';
+                div.onclick = () => openLightbox(src);
+                div.innerHTML = `
+                    <img src="${src}" alt="${label}" class="w-full h-auto object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-end pb-6">
+                        <div class="p-3 bg-white/10 backdrop-blur-md rounded-full mb-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <i data-lucide="zoom-in" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-white text-xs font-manrope font-medium tracking-wide translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">View ${label}</span>
+                    </div>
+                `;
+                container.appendChild(div);
+        }
+
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        }
+
+        // --- Carousel Logic (Cover Flow) ---
+        function initCarousels() {
+            const container = document.getElementById('carousel-rows-container');
+            if (container.children.length > 0) return; 
+
+            renderCarouselRow(container, "1. Carousel no. 1", educationalSeries);
+            renderCarouselRow(container, "2. Carousel no. 2", promotionalSeries);
+             renderCarouselRow(container, "3. Carousel no. 3", thirdSeries);
+        }
+        // --- Video Player Logic ---
+function openVideoPlayer(thumbnailUrl) {
+    const videoLightbox = document.getElementById('video-lightbox');
+    const iframe = document.getElementById('video-iframe');
+    
+    // Extract the File ID from your Google Drive Thumbnail Link
+    // Pattern: id=YOUR_ID_HERE
+    let fileId = "";
+    const match = thumbnailUrl.match(/id=([^&]+)/);
+    
+    if (match && match[1]) {
+        fileId = match[1];
+        // Create the Google Drive Video Preview URL
+        const videoUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+        
+        iframe.src = videoUrl;
+        videoLightbox.classList.remove('hidden');
+        videoLightbox.classList.add('flex');
+    } else {
+        alert("Could not extract video ID. Make sure you are using the thumbnail link format.");
+    }
+}
+
+function closeVideoPlayer() {
+    const videoLightbox = document.getElementById('video-lightbox');
+    const iframe = document.getElementById('video-iframe');
+    
+    // Clear src to stop video audio when closed
+    iframe.src = "";
+    videoLightbox.classList.add('hidden');
+    videoLightbox.classList.remove('flex');
+}
+        function initVideoReelCarousel() {
+            const container = document.getElementById('video-carousel-container');
+            if (container.children.length > 0) return;
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mb-12 w-full';
+            const row = document.createElement('div');
+            row.className = 'relative h-[500px] flex items-center justify-center w-full perspective-1000 overflow-visible';
+            
+            let activeIndex = Math.floor(videoReels.length / 2);
+
+            function updateRow() {
+                row.innerHTML = '';
+                videoReels.forEach((imgSrc, i) => {
+                    const offset = i - activeIndex;
+                    const absOffset = Math.abs(offset);
+                    if (absOffset > 2) return; 
+
+                    const zIndex = 30 - absOffset * 10;
+                    const opacity = 1 - absOffset * 0.2;
+                    const scale = 1 - absOffset * 0.15;
+                    const translateX = offset * 70; 
+
+                    const card = document.createElement('div');
+                    card.className = `absolute transition-all duration-500 ease-out cursor-pointer rounded-2xl overflow-hidden border border-white/20 shadow-2xl hover-trigger bg-black/50 ${offset === 0 ? 'ring-2 ring-white/50 shadow-indigo-500/20' : ''}`;
+                    card.style = `transform: translateX(${translateX}%) scale(${scale}); z-index: ${zIndex}; opacity: ${opacity}; width: 300px; aspect-ratio: 9/16;`;
+                    // Updated OnClick Logic
+card.onclick = () => {
+    if (activeIndex === i) {
+        // If clicking the CENTER card, play the video
+        openVideoPlayer(imgSrc);
+    } else {
+        // If clicking a SIDE card, just rotate to it
+        activeIndex = i;
+        updateRow();
+    }
+};
+                    card.innerHTML = `
+                        <img src="${imgSrc}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/0 transition-colors duration-500 ${offset !== 0 ? 'bg-black/40 hover:bg-black/20' : ''}"></div>
+                        ${offset === 0 ? '<div class="absolute inset-0 flex items-center justify-center"><div class="p-3 bg-white/20 backdrop-blur-md rounded-full"><i data-lucide="play" class="w-8 h-8 text-white fill-white"></i></div></div>' : ''}
+                    `;
+                    row.appendChild(card);
+                });
+            }
+            updateRow();
+            wrapper.appendChild(row);
+            container.appendChild(wrapper);
+            lucide.createIcons();
+        }
+
+        function renderCarouselRow(container, title, images) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'mb-12 w-full';
+            
+            const header = document.createElement('h3');
+            header.className = 'text-white font-manrope text-xl mb-8 pl-4 border-l-4 border-indigo-500';
+            header.textContent = title;
+            wrapper.appendChild(header);
+
+            const row = document.createElement('div');
+            row.className = 'relative h-[400px] flex items-center justify-center w-full perspective-1000 overflow-visible';
+            
+            let activeIndex = Math.floor(images.length / 2);
+
+            function updateRow() {
+                row.innerHTML = '';
+                images.forEach((imgSrc, i) => {
+                    const offset = i - activeIndex;
+                    const absOffset = Math.abs(offset);
+                    if (absOffset > 2) return; 
+
+                    const zIndex = 30 - absOffset * 10;
+                    const opacity = 1 - absOffset * 0.2;
+                    const scale = 1 - absOffset * 0.15;
+                    const translateX = offset * 60; 
+
+                    const card = document.createElement('div');
+                    card.className = `absolute transition-all duration-500 ease-out cursor-pointer rounded-2xl overflow-hidden border border-white/20 shadow-2xl hover-trigger bg-black/50 ${offset === 0 ? 'ring-2 ring-white/50' : ''}`;
+                    card.style = `transform: translateX(${translateX}%) scale(${scale}); z-index: ${zIndex}; opacity: ${opacity}; width: 280px; aspect-ratio: 1/1;`;
+                    card.onclick = () => { activeIndex = i; updateRow(); };
+                    card.innerHTML = `<img src="${imgSrc}" class="w-full h-full object-cover"><div class="absolute inset-0 bg-black/0 transition-colors duration-500 ${offset !== 0 ? 'bg-black/40 hover:bg-black/20' : ''}"></div>`;
+                    row.appendChild(card);
+                });
+            }
+            updateRow();
+            wrapper.appendChild(row);
+            container.appendChild(wrapper);
+        }
+
+    </script>
+</body>
+</html>
