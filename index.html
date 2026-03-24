@@ -127,10 +127,24 @@
             </div>
             
             <!-- Social Icons -->
-            <div class="w-full md:w-1/3 flex justify-center gap-6">
-                <a href="https://www.instagram.com/artistic_rohitraj/" target="_blank" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger"><i data-lucide="instagram" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110"></i></a>
-                <a href="https://www.linkedin.com/in/18rohitraj/" target="_blank" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger"><i data-lucide="linkedin" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110"></i></a>
-                <a href="mailto:18rsquare@gmail.com" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger"><i data-lucide="mail" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110"></i></a>
+            <div class="w-1/3 flex justify-center gap-6">
+                <a href="https://www.instagram.com/artistic_rohitraj/" target="_blank" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                    </svg>
+                </a>
+                
+                <a href="https://www.linkedin.com/in/18rohitraj/" target="_blank" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle>
+                    </svg>
+                </a>
+                
+                <a href="mailto:18rsquare@gmail.com" class="group p-2 rounded-full hover:bg-white/10 transition-colors duration-200 cursor-pointer hover-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-slate-400 group-hover:text-white transition-transform group-hover:scale-110">
+                        <rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                </a>
             </div>
             
             <!-- Status -->
@@ -163,7 +177,7 @@
         </section>
 
         <!-- Case Study Section -->
-        <section class="py-16 px-6">
+        <section class="pt-4 pb-16 px-6">
             <div class="max-w-7xl mx-auto">
                 <div class="mb-10">
                     <span class="inline-block text-white font-manrope font-medium mb-4 text-sm cursor-default">• Case Study</span>
@@ -171,17 +185,40 @@
                         Some case studies on some projects I've worked on
                     </h2>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div onclick="openModal('case-study-modal')" class="group cursor-pointer rounded-3xl border border-white/20 p-4 bg-black/50 hover:bg-black/70 transition-colors duration-300 hover-trigger relative z-10 shadow-lg hover:shadow-indigo-500/20">
-                        <div class="bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl overflow-hidden aspect-[4/3] mb-6 relative w-full flex items-center justify-center"><img src="https://drive.google.com/thumbnail?id=1-_pzQk_eD8mEDntdAg3KTT1gQf2JDIbr&sz=w1000" alt="Referral Reward App Screens" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-500" /></div>
-                        <div class="flex justify-between items-end px-2 pb-2"><h3 class="text-xl font-manrope font-medium text-white max-w-[80%] leading-snug">Referral Reward Flow For Ed. Teach Platform</h3><i data-lucide="arrow-up-right" class="w-6 h-6 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i></div>
+                <div class="flex overflow-x-auto gap-6 pb-8 custom-scrollbar snap-x snap-mandatory items-stretch">
+                    
+                    <div onclick="openModal('case-study-modal')" class="shrink-0 w-[85vw] md:w-[400px] lg:w-[450px] snap-center group cursor-pointer rounded-3xl border border-white/20 p-4 bg-black/50 hover:bg-black/70 transition-colors duration-300 hover-trigger relative z-10 shadow-lg hover:shadow-indigo-500/20 flex flex-col">
+                        <div class="bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl overflow-hidden aspect-[4/3] mb-6 relative w-full flex items-center justify-center">
+                            <img src="https://drive.google.com/thumbnail?id=1-_pzQk_eD8mEDntdAg3KTT1gQf2JDIbr&sz=w1000" alt="Referral Reward App Screens" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="mt-auto flex justify-between items-end px-2 pb-2">
+                            <h3 class="text-xl font-manrope font-medium text-white max-w-[80%] leading-snug">Referral Reward Flow For Ed. Teach Platform</h3>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </div>
                     </div>
-                    <div class="group rounded-3xl border border-white/10 p-4 bg-black/30 cursor-default opacity-60">
-                        <div class="bg-slate-100/10 rounded-2xl overflow-hidden aspect-[4/3] mb-6 relative w-full flex flex-col items-center justify-center text-center p-6 backdrop-blur-sm"><h4 class="text-slate-300 text-3xl font-bold mb-2 font-manrope tracking-tight">COMING <br/> SOON</h4><p className="text-slate-500 text-sm font-manrope">New UX Case Study <br/> arriving soon.</p></div>
-                        <div class="flex justify-between items-end px-2 pb-2"><h3 class="text-xl font-manrope font-medium text-white/50 max-w-[80%] leading-snug">New UI/UX Case Study arriving soon</h3><i data-lucide="arrow-up-right" class="w-6 h-6 text-white/30"></i></div>
+                    
+                    <div onclick="openModal('wall-fabrica-modal')" class="shrink-0 w-[85vw] md:w-[400px] lg:w-[450px] snap-center group cursor-pointer rounded-3xl border border-white/20 p-4 bg-black/50 hover:bg-black/70 transition-colors duration-300 hover-trigger relative z-10 shadow-lg hover:shadow-indigo-500/20 flex flex-col">
+                        <div class="bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl overflow-hidden aspect-[4/3] mb-6 relative w-full flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop" alt="Wall Fabrica App Screens" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-500" />
+                        </div>
+                        <div class="mt-auto flex justify-between items-end px-2 pb-2">
+                            <h3 class="text-xl font-manrope font-medium text-white max-w-[80%] leading-snug">Wall Fabrica – Interior Cost Calculator</h3>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6 text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                        </div>
                     </div>
+
+                    <div class="shrink-0 w-[85vw] md:w-[400px] lg:w-[450px] snap-center group rounded-3xl border border-white/10 p-4 bg-black/30 cursor-default opacity-60 flex flex-col">
+                        <div class="bg-slate-100/10 rounded-2xl overflow-hidden aspect-[4/3] mb-6 relative w-full flex flex-col items-center justify-center text-center p-6 backdrop-blur-sm">
+                            <h4 class="text-slate-300 text-3xl font-bold mb-2 font-manrope tracking-tight">COMING <br/> SOON</h4>
+                            <p class="text-slate-500 text-sm font-manrope">New UX Case Study <br/> arriving soon.</p>
+                        </div>
+                        <div class="mt-auto flex justify-between items-end px-2 pb-2">
+                            <h3 class="text-xl font-manrope font-medium text-white/50 max-w-[80%] leading-snug">New UI/UX Case Study arriving soon</h3>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6 text-white/30"></i>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
         </section>
 
         <!-- About Section -->
@@ -195,8 +232,8 @@
                         </div>
                     </div>
                     <div class="w-full md:w-4/5 flex flex-col justify-start">
-                        <p class="text-sm md:text-[16px] font-poppins leading-relaxed mb-6 text-slate-300 cursor-default">I'm a Graphic and UI/UX Designer who believes every visual should tell a story and serve a purpose. Over the past 1 year and 8 months, I've been designing meaningful digital experiences that help people learn, grow, and connect from creating engaging visuals in EdTech to shaping mindful interfaces around Mental Health and Life Skills.</p>
-                        <p class="text-sm md:text-[16px] font-poppins leading-relaxed mb-8 text-slate-300 cursor-default">At <span class="font-bold text-white">Sensei</span>, I design user-centered interfaces and visual narratives that transform ideas into intuitive, impactful experiences. My work blends creativity with strategy - combining design thinking, storytelling, and visual harmony to craft designs that not only look beautiful but truly resonate with people.</p>
+                        <p class="text-sm md:text-[16px] font-poppins leading-relaxed mb-6 text-slate-300 cursor-default">I'm a Graphic and UI/UX Designer who believes every visual should tell a story and serve a purpose. Over the past 2 years and 3 months, I've been designing meaningful digital experiences that help people learn, grow, and connect—from creating engaging visuals in EdTech to shaping mindful interfaces around Mental Health and Life Skills during my two years at Sensei.</p>
+                        <p class="text-sm md:text-[16px] font-poppins leading-relaxed mb-8 text-slate-300 cursor-default">  <span class="font-bold text-white">Currently</span>, as a Graphic Designer at Everse, I continue to design user-centered visual narratives that transform ideas into impactful experiences. My work blends creativity with strategy—combining design thinking, storytelling, and visual harmony to craft designs that not only look beautiful but truly resonate with people.</p>
                         <div class="flex flex-wrap gap-3">
                             <span class="px-4 py-2 md:px-5 md:py-2.5 bg-white text-slate-900 rounded-full text-xs md:text-sm font-manrope font-bold shadow-sm cursor-default hover:bg-slate-100 transition-colors hover-trigger whitespace-nowrap">UI</span>
                             <span class="px-4 py-2 md:px-5 md:py-2.5 bg-white text-slate-900 rounded-full text-xs md:text-sm font-manrope font-bold shadow-sm cursor-default hover:bg-slate-100 transition-colors hover-trigger whitespace-nowrap">UX</span>
@@ -288,6 +325,154 @@
                         <section class="mb-16"><h2 class="text-4xl font-times text-white mb-6">Problem Statement</h2><div class="bg-white/5 border border-white/5 p-8 rounded-xl backdrop-blur-md"><p class="text-slate-300 font-poppins leading-relaxed mb-6">Sensei, our ed-tech platform, aimed to grow its user base by encouraging <strong class="text-white">parents and influencers</strong> to invite others to join. While the idea of a referral program was clear, the <strong class="text-white">challenge</strong> was how to design a <strong className="text-white">referral flow</strong> that:</p><ol class="list-decimal list-inside text-slate-300 font-poppins space-y-2 ml-2 mb-8"><li>Motivated users with <strong class="text-white">clear, tangible rewards</strong>.</li><li>Worked seamlessly across <strong class="text-white">mobile and desktop</strong>.</li><li>Balanced two different user types.</li><li>Reduced <strong class="text-white">friction in the referral process</strong>.</li></ol><p class="text-slate-300 font-poppins leading-relaxed mb-4">The team had noticed that previous referral attempts on other ed-tech apps often failed because:</p><ul class="list-disc list-inside text-slate-400 font-poppins space-y-2 ml-2 mb-8"><li>Rewards were unclear or delayed.</li><li>Users couldn't track whether their referral was successful.</li><li>The process felt complicated or hidden.</li></ul><div class="mt-8"><h4 class="text-white font-manrope font-bold mb-2">The design challenge:</h4><p class="text-slate-300 font-poppins">How might we create a referral experience that feels <strong class="text-white">simple, transparent, and rewarding</strong>, while aligning with Sensei's mission of building trust with parents and influencers?</p></div></div></section>
                         <section class="mb-16"><h2 class="text-4xl font-times text-white mb-8">Research</h2><div class="border border-white/20 rounded-xl overflow-hidden mb-12"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">1. User Personas</h3></div><div class="p-6 md:p-8 bg-[#1a1a1a]"><div class="grid grid-cols-1 md:grid-cols-2 gap-10"><div><h4 class="text-lg font-manrope text-white mb-4">Parent Persona</h4><ul class="space-y-4 text-sm font-poppins text-slate-300"><li>• <strong class="text-white">Profile:</strong> 35-year-old mother, working professional, has a 7-year-old child.</li><li>• <strong class="text-white">Motivation:</strong> Wants quality education and emotional learning for her child at affordable costs.</li><li>• <strong class="text-white">Goals:</strong> <ul class="list-disc list-inside ml-4 mt-2 text-slate-400"><li>Access engaging and trustworthy learning platforms.</li><li>Save money while ensuring quality.</li></ul></li><li>• <strong class="text-white">Pain Points:</strong> <ul class="list-disc list-inside ml-4 mt-2 text-slate-400"><li>Confused by complicated referral processes.</li><li>Doesn't trust vague reward systems.</li></ul></li></ul></div><div class="md:border-l md:border-white/10 md:pl-10"><h4 class="text-lg font-manrope text-white mb-4">Influencer Persona</h4><ul class="space-y-4 text-sm font-poppins text-slate-300"><li>• <strong class="text-white">Profile:</strong> 28-year-old content creator, 50k Instagram followers.</li><li>• <strong class="text-white">Motivation:</strong> Recommend credible platforms & build reputation.</li><li>• <strong class="text-white">Goals:</strong> <ul class="list-disc list-inside ml-4 mt-2 text-slate-400"><li>Earn rewards or recognition.</li><li>Easily share referral codes/links.</li></ul></li><li>• <strong class="text-white">Pain Points:</strong> <ul class="list-disc list-inside ml-4 mt-2 text-slate-400"><li>Existing apps don't provide transparent tracking.</li><li>Rewards often feel too small or irrelevant.</li></ul></li></ul></div></div></div></div><div class="border border-white/20 rounded-xl overflow-hidden mb-8"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">Competitive Analysis</h3></div><div class="p-6 bg-[#1a1a1a]"><p class="text-slate-300 font-poppins text-sm mb-4">We studied referral programs of apps like <strong class="text-white">Duolingo, Byju's, and Khan Academy</strong>.</p><ul class="space-y-2 text-sm font-poppins text-slate-300 mb-4"><li>• <strong class="text-white">Strengths Found:</strong> <ul class="list-disc list-inside ml-4 mt-1 text-slate-400"><li>Duolingo: Clear progress tracking.</li><li>Byju's: Monetary discounts.</li></ul></li><li>• <strong class="text-white">Weaknesses Found:</strong> <ul class="list-disc list-inside ml-4 mt-1 text-slate-400"><li>Many hide referral under multiple clicks.</li><li>Rewards delayed.</li></ul></li></ul></div></div><div class="border border-white/20 rounded-xl overflow-hidden"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">Key Insights</h3></div><div class="p-6 bg-[#1a1a1a]"><ul class="space-y-2 text-sm font-poppins text-slate-300"><li>• <strong class="text-white">Transparency builds trust</strong> → users must see status.</li><li>• <strong class="text-white">Immediate gratification</strong> → instant coupon boosts motivation.</li><li>• <strong class="text-white">Ease of sharing</strong> → simple buttons are crucial.</li></ul></div></div></section>
                         <section class="mb-16"><h2 class="text-4xl font-times text-white mb-8">Design Goals & Solution Approach</h2><div class="border border-white/20 rounded-xl overflow-hidden mb-12"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">Design Goals</h3></div><div class="p-6 bg-[#1a1a1a]"><p class="text-slate-400 font-poppins text-sm mb-4">Based on research insights, we set these goals:</p><ol class="list-decimal list-inside text-slate-300 font-poppins space-y-3 text-sm"><li><strong class="text-white">Simplicity:</strong> 2-3 clicks max.</li><li><strong class="text-white">Transparency:</strong> Clear status tracking.</li><li><strong class="text-white">Motivation:</strong> Instant gratification.</li><li><strong class="text-white">Flexibility:</strong> WhatsApp, Email, Copy Link.</li></ol></div></div><div class="border border-white/20 rounded-xl overflow-hidden mb-12"><div class="bg-white/10 p-4"><h3 class="text-xl font-manrope text-white font-bold">Solution Approach</h3></div><div class="p-6 bg-[#1a1a1a]"><p class="text-slate-400 font-poppins text-sm mb-4">We designed the flow as follows:</p><ol class="list-decimal list-inside text-slate-300 font-poppins space-y-3 text-sm"><li><strong class="text-white">Entry Point:</strong> Prominent "Invite & Earn" CTA.</li><li><strong class="text-white">Referral Generation:</strong> Unique link with one-tap sharing.</li><li><strong class="text-white">Reward Feedback:</strong> Real-time updates on friend joining.</li><li><strong class="text-white">Redemption:</strong> "My Rewards" section for coupons.</li></ol></div></div><div class="w-full rounded-2xl overflow-hidden mb-16 border border-white/10 shadow-2xl shadow-black/50"><img src="https://drive.google.com/thumbnail?id=1-_pzQk_eD8mEDntdAg3KTT1gQf2JDIbr&sz=w1000" alt="Solution" class="w-full h-auto object-cover" /></div><h3 class="text-4xl font-times text-white mb-6">User Flow: Referral Reward Flow</h3><p class="text-slate-400 font-poppins text-sm mb-8">We have <strong class="text-white">two main user types: Parents</strong> and <strong class="text-white">Influencers</strong>.</p><div class="space-y-8"><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 1: Discover</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Parent sees CTA on dashboard.</p></div></div><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 2: Share</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Tap to open share options.</p></div></div><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 3: Friend Joins</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Friend clicks link and signs up.</p></div></div><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 4: Reward</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Instant notification of reward.</p></div></div><div class="flex gap-4 items-start"><div><h4 class="text-white font-bold text-lg font-manrope">Step 5: Redeem</h4><p class="text-slate-400 text-sm font-poppins mt-1">• Coupon applied at checkout.</p></div></div></div>
+                        <div class="text-center pb-8 border-t border-white/10 pt-8 mt-12"><p class="text-slate-500 font-poppins text-sm">End of Case Study</p></div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wall-fabrica-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md cursor-pointer" onclick="closeModal('wall-fabrica-modal')"></div>
+        <div class="relative w-full max-w-6xl max-h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-modal-in">
+            <div class="overflow-y-auto custom-scrollbar relative h-full">
+                <div class="sticky top-0 right-0 z-50 flex justify-end p-6 pointer-events-none">
+                    <button onclick="closeModal('wall-fabrica-modal')" class="pointer-events-auto p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10 shadow-lg"><i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i></button>
+                </div>
+                
+                <div class="px-6 md:px-12 pb-12 -mt-16">
+                    <article class="max-w-4xl mx-auto pt-8">
+                        <h1 class="text-3xl md:text-5xl font-times text-white mb-10 leading-tight mt-8">Case Study: Wall Fabrica – Interior Cost Calculator</h1>
+                        
+                        <div class="w-full rounded-2xl overflow-hidden mb-16 border border-white/10 shadow-2xl shadow-black/50 bg-slate-800">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop" alt="Wall Fabrica Hero" class="w-full h-auto object-cover opacity-80" />
+                        </div>
+                        
+                        <section class="mb-16">
+                            <h2 class="text-4xl font-times text-white mb-6">1. Problem</h2>
+                            <div class="bg-white/5 border border-white/5 p-8 rounded-xl backdrop-blur-md mb-8">
+                                <p class="text-slate-300 font-poppins leading-relaxed mb-6">When people plan home interiors, they get confused about pricing.</p>
+                                <ul class="list-disc list-inside text-slate-400 font-poppins space-y-2 ml-2 mb-6">
+                                    <li>No clear idea of total cost</li>
+                                    <li>Too many hidden charges</li>
+                                    <li>Hard to compare materials and options</li>
+                                    <li>Customers hesitate to take the next step</li>
+                                </ul>
+                                <div class="p-4 bg-red-500/10 border-l-4 border-red-500 rounded-r-lg">
+                                    <p class="text-red-400 font-poppins font-medium">👉 Result: Users drop off before contacting the company.</p>
+                                </div>
+                            </div>
+
+                            <h2 class="text-4xl font-times text-white mb-6 mt-12">2. Goal</h2>
+                            <p class="text-slate-300 font-poppins leading-relaxed mb-4">Design a simple and transparent calculator that:</p>
+                            <ul class="list-disc list-inside text-slate-400 font-poppins space-y-2 ml-2">
+                                <li>Shows instant cost estimation</li>
+                                <li>Helps users customize their choices</li>
+                                <li>Builds trust with clear pricing</li>
+                                <li>Encourages users to book a consultation</li>
+                            </ul>
+                        </section>
+
+                        <section class="mb-16">
+                            <h2 class="text-4xl font-times text-white mb-8">3. My Approach</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="border border-white/20 rounded-xl p-6 bg-[#1a1a1a]">
+                                    <h3 class="text-xl font-manrope text-white font-bold mb-4">Step 1: Understand the User</h3>
+                                    <h4 class="text-white font-manrope font-medium mt-4 mb-2">Target users:</h4>
+                                    <ul class="list-disc list-inside text-slate-400 font-poppins text-sm space-y-1 mb-4">
+                                        <li>Homeowners</li>
+                                        <li>First-time interior buyers</li>
+                                        <li>People with budget confusion</li>
+                                    </ul>
+                                    <h4 class="text-white font-manrope font-medium mt-4 mb-2">User mindset:</h4>
+                                    <p class="text-slate-300 font-poppins text-sm italic">“Kitna kharcha hoga? Hidden cost toh nahi hai?”</p>
+                                </div>
+                                <div class="border border-white/20 rounded-xl p-6 bg-[#1a1a1a]">
+                                    <h3 class="text-xl font-manrope text-white font-bold mb-4">Step 2: Simplify the Experience</h3>
+                                    <p class="text-slate-400 font-poppins text-sm mb-4">I broke the calculator into easy steps:</p>
+                                    <ol class="list-decimal list-inside text-slate-300 font-poppins text-sm space-y-2 mb-4">
+                                        <li>Select space (Bedroom, Living Room, etc.)</li>
+                                        <li>Choose materials / finishes</li>
+                                        <li>Adjust size or quantity</li>
+                                        <li>See instant price update</li>
+                                    </ol>
+                                    <div class="p-3 bg-indigo-500/10 border border-indigo-500/30 rounded-lg">
+                                        <p class="text-indigo-400 font-poppins text-sm font-medium">👉 No complex forms. Only guided flow.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="mb-16">
+                            <h2 class="text-4xl font-times text-white mb-8">4. Design Decisions</h2>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                                <div class="bg-white/5 border border-white/10 p-6 rounded-xl">
+                                    <h4 class="text-lg font-manrope text-white font-bold mb-2">1. Step-by-step flow</h4>
+                                    <p class="text-slate-400 text-sm font-poppins">• Avoid overwhelming screens<br>• One decision at a time</p>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 p-6 rounded-xl">
+                                    <h4 class="text-lg font-manrope text-white font-bold mb-2">2. Real-time price update</h4>
+                                    <p class="text-slate-400 text-sm font-poppins">• Price changes instantly when user selects options<br>• Builds trust</p>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 p-6 rounded-xl">
+                                    <h4 class="text-lg font-manrope text-white font-bold mb-2">3. Highlight total cost</h4>
+                                    <p class="text-slate-400 text-sm font-poppins">• Final cost always visible<br>• Sticky CTA at bottom</p>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 p-6 rounded-xl">
+                                    <h4 class="text-lg font-manrope text-white font-bold mb-2">4. Color usage</h4>
+                                    <p class="text-slate-400 text-sm font-poppins">• Orange = action (CTA, highlights)<br>• White = clean and premium feel<br>• Light grey = background for clarity</p>
+                                </div>
+                            </div>
+
+                            <h2 class="text-4xl font-times text-white mb-6">5. Key Features</h2>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-4 py-2 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-sm font-poppins">✅ Instant price calculation</span>
+                                <span class="px-4 py-2 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-sm font-poppins">✅ Easy customization</span>
+                                <span class="px-4 py-2 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-sm font-poppins">✅ Clear breakdown of cost</span>
+                                <span class="px-4 py-2 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-sm font-poppins">✅ Mobile-friendly design</span>
+                                <span class="px-4 py-2 bg-green-500/20 text-green-400 border border-green-500/30 rounded-full text-sm font-poppins">✅ Strong CTA</span>
+                            </div>
+                        </section>
+
+                        <section class="mb-16">
+                            <h2 class="text-4xl font-times text-white mb-8">6. Challenges & Solutions</h2>
+                            <div class="space-y-6">
+                                <div class="flex flex-col md:flex-row gap-4 bg-[#1a1a1a] border border-white/10 p-6 rounded-xl">
+                                    <div class="md:w-1/3"><h4 class="text-white font-bold text-lg font-manrope">1. Too many options</h4><p class="text-slate-400 text-sm font-poppins mt-1">Interior has many combinations.</p></div>
+                                    <div class="md:w-2/3 flex items-center"><div class="p-4 bg-indigo-500/10 border border-indigo-500/20 rounded-lg w-full"><p class="text-indigo-300 font-poppins text-sm"><strong class="text-indigo-400">👉 Solution:</strong> Grouped options into simple categories</p></div></div>
+                                </div>
+                                <div class="flex flex-col md:flex-row gap-4 bg-[#1a1a1a] border border-white/10 p-6 rounded-xl">
+                                    <div class="md:w-1/3"><h4 class="text-white font-bold text-lg font-manrope">2. Trust issue</h4><p class="text-slate-400 text-sm font-poppins mt-1">Users don’t trust pricing tools.</p></div>
+                                    <div class="md:w-2/3 flex items-center"><div class="p-4 bg-indigo-500/10 border border-indigo-500/20 rounded-lg w-full"><p class="text-indigo-300 font-poppins text-sm"><strong class="text-indigo-400">👉 Solution:</strong> Transparent breakdown, No hidden values, Clean UI</p></div></div>
+                                </div>
+                                <div class="flex flex-col md:flex-row gap-4 bg-[#1a1a1a] border border-white/10 p-6 rounded-xl">
+                                    <div class="md:w-1/3"><h4 class="text-white font-bold text-lg font-manrope">3. Drop-offs</h4><p class="text-slate-400 text-sm font-poppins mt-1">Users leave if flow is long.</p></div>
+                                    <div class="md:w-2/3 flex items-center"><div class="p-4 bg-indigo-500/10 border border-indigo-500/20 rounded-lg w-full"><p class="text-indigo-300 font-poppins text-sm"><strong class="text-indigo-400">👉 Solution:</strong> Reduced steps, Sticky button, Quick interactions</p></div></div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="mb-16 border-t border-white/10 pt-12">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                                <div>
+                                    <h2 class="text-3xl font-times text-white mb-6">7. Result (Expected Impact)</h2>
+                                    <ul class="space-y-4 text-slate-300 font-poppins">
+                                        <li class="flex items-center gap-3"><span class="text-2xl">📈</span> Increased user engagement</li>
+                                        <li class="flex items-center gap-3"><span class="text-2xl">📈</span> Higher inquiry / booking rate</li>
+                                        <li class="flex items-center gap-3"><span class="text-2xl">📉</span> Reduced confusion</li>
+                                        <li class="flex items-center gap-3"><span class="text-2xl">💡</span> Better brand trust</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h2 class="text-3xl font-times text-white mb-6">8. What I Learned</h2>
+                                    <div class="bg-white/5 border border-white/10 p-6 rounded-xl space-y-4 text-slate-300 font-poppins text-sm">
+                                        <p><strong>1.</strong> Simplicity is more powerful than features</p>
+                                        <p><strong>2.</strong> Pricing clarity = trust</p>
+                                        <p><strong>3.</strong> Step-by-step UX works best for complex decisions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
                         <div class="text-center pb-8 border-t border-white/10 pt-8 mt-12"><p class="text-slate-500 font-poppins text-sm">End of Case Study</p></div>
                     </article>
                 </div>
@@ -473,6 +658,10 @@
     <script>
         // --- Data ---
         const socialImages = [
+            "https://drive.google.com/thumbnail?id=1NeAiKKnUNrz9_5zxMBbOU8Ma8_oR_19X&sz=w1000",
+            "https://drive.google.com/thumbnail?id=17glz2YKDUS9bhjcBUAiprCVzjsGEY9iR&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1oPZh72MbhNv7-IJ6TQm6VFs7Y5AwQl-e&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1SlnoYFZHKzgJW5rMJCZUB42bWtUD513M&sz=w1000",
             "https://drive.google.com/thumbnail?id=1_hMWFmDEhyxAtKJeuWRG-Xyf1EACusSt&sz=w1000",
             "https://drive.google.com/thumbnail?id=1DPotuVs7suTuiuCBxHIiPviFFAj5_P-f&sz=w1000",
             "https://drive.google.com/thumbnail?id=1MCYuuenglhmQVAmqW_2y9fk6Pb-WzZa0&sz=w1000",
@@ -483,7 +672,8 @@
             "https://drive.google.com/thumbnail?id=14tk9EkkJKifz_idpu7j942cxHpWI8MlJ&sz=w1000",
             "https://drive.google.com/thumbnail?id=1WKKPwzaKnXpvNylXHvlooK4x2eHb_7OR&sz=w1000",
             "https://drive.google.com/thumbnail?id=1QGSg6OjpZZCFFt_HbFODiygUJNdP8U2F&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1TsaGRcpqQ2vNAqnlKCQoAXj3G86ARz0O&sz=w1000"
+            "https://drive.google.com/thumbnail?id=1TsaGRcpqQ2vNAqnlKCQoAXj3G86ARz0O&sz=w1000",
+            
         ];
         
         const uiUxImages = [
@@ -518,13 +708,23 @@
             "https://drive.google.com/thumbnail?id=1d2oOIqHPeT35cEHbYA44K-ouPkldb6-Q&sz=w1000",
             "https://drive.google.com/thumbnail?id=1Ww8M1lLpASmVL5_epVLcJf8f1-NDC8x8&sz=w1000",
         ];
-        
+
         const thirdSeries = [
             "https://drive.google.com/thumbnail?id=1wapdbtPekkIjl7ocXIkBT8ZmWOmEYQIg&sz=w1000",
             "https://drive.google.com/thumbnail?id=12bva_9leDulX7yHA7XoPEpNeHmIhPz8s&sz=w1000",
             "https://drive.google.com/thumbnail?id=1mCryQs5N5Nq3_pwbKdHMz2Ru-i-a4572&sz=w1000",
             "https://drive.google.com/thumbnail?id=1ig4qfKixKUraHD23oG_k6swHMN4TNXK9&sz=w1000",
             "https://drive.google.com/thumbnail?id=1x4EWMkyzxsO74Lh79YvAo--ZLrlInU5Z&sz=w1000",
+        ]; 
+
+        const forthSeries = [
+            "https://drive.google.com/thumbnail?id=19R_Mi59tmAQuVPDnqoRQCfPOaUPwF7eh&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1uAXmTMkXh4louvhqy0DOLfn7oNbMgOKE&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1FJnFzk8vc48j5Gp8sz7PfFBtufWUR9xz&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1JBdfnunEqxvEWthzX4JXYecZafgUQoWk&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1AKHJ7rDRmy6sqc_mgarwuKnoQDQEAFy_&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1UVWA3lT9BNQHZU7JN5QGodhLaVckfMVD&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1n8HfZSGM9Kv3InmegY3myUKW6tgQxI7q&sz=w1000",
         ];
 
         const printMediaImages = [
@@ -537,9 +737,12 @@
         const videoReels = [
             "https://drive.google.com/thumbnail?id=1t5TipxiSx9CdOra69QwFEh48oeOuBm2n&sz=w1000",
             "https://drive.google.com/thumbnail?id=10BnKVG0AMepWr-s3PD13TEtYgxyaoo7s&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1zN7PDsOJvtyJO9yEQ_OBV7BT2gM3USrF&sz=w1000",
+            "https://drive.google.com/thumbnail?id=1oICRybjU4OGe8X6LgdfTx1xVMx6pKiYY&sz=w1000",
             "https://drive.google.com/thumbnail?id=1JGQdYyKJOv7ozuWOu9VE1F1NXkrOGaPw&sz=w1000",
             "https://drive.google.com/thumbnail?id=1Q41JHlsMI-RXHATMsgst6ee6Vjcys6-I&sz=w1000",
             "https://drive.google.com/thumbnail?id=1VSkvi8rCTkyjGPyXjiep_B-_76UPCscI&sz=w1000",
+        
         ];
 
         const hobbiesData = [
@@ -798,6 +1001,7 @@
             renderCarouselRow(container, "1. Carousel no. 1", educationalSeries);
             renderCarouselRow(container, "2. Carousel no. 2", promotionalSeries);
             renderCarouselRow(container, "3. Carousel no. 3", thirdSeries);
+            renderCarouselRow(container, "4. Carousel no. 4", forthSeries);
         }
         
         function initVideoReelCarousel() {
