@@ -12,6 +12,9 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
     
     <!-- Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -588,6 +591,23 @@
         </div>
     </div>
 
+    <div id="pdf-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center bg-black/95 p-4 md:p-8">
+        <div class="absolute inset-0 cursor-pointer" onclick="closeModal('pdf-modal')"></div>
+        
+        <button onclick="closeModal('pdf-modal')" class="absolute top-6 right-6 p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors cursor-pointer z-[250] group border border-white/10">
+            <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform"></i>
+        </button>
+
+        <div class="relative w-full h-[85vh] z-[210] flex flex-col">
+            <h2 id="pdf-title" class="text-2xl font-times text-white mb-6 text-center z-[220] pointer-events-none">Brand Manual</h2>
+            
+            <div id="pdf-render-container" class="flex overflow-x-auto gap-6 pb-6 custom-scrollbar snap-x snap-mandatory items-center h-full w-full px-[10vw]">
+                </div>
+            
+            <div class="text-center text-slate-500 font-poppins text-sm mt-4 z-[220] pointer-events-none">Swipe horizontally to read the manual</div>
+        </div>
+    </div>
+
     <!-- Video and Reel Modal (Cover Flow Style) -->
     <div id="video-reel-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
         <div class="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer" onclick="closeModal('video-reel-modal')"></div>
@@ -624,8 +644,18 @@
                     <h2 class="text-3xl font-times text-white mb-10 text-left">Logo Design & Branding Process</h2>
                     
                     <div class="mb-16">
-                        <h3 class="text-2xl font-manrope text-indigo-400 mb-2">Cabway</h3>
-                        <p class="text-slate-400 text-sm mb-6 font-poppins">Initial sketches, grid measurements, and final identity.</p>
+                        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                            <div>
+                                <h3 class="text-2xl font-manrope text-indigo-400 mb-2">Prolift Systems</h3>
+                                <p class="text-slate-400 text-sm font-poppins">Comprehensive visual identity, typography, and brand geometry.</p>
+                            </div>
+                            
+                            <button onclick="openModal('pdf-modal', 'prolift-manual.pdf', 'Prolift Systems - Visual Identity')" class="flex items-center gap-2 px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-full font-manrope text-sm transition-colors border border-white/20 group hover-trigger w-fit shrink-0">
+                                <i data-lucide="book-open" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
+                                Read Full Brand Manual
+                            </button>
+                        </div>
+                        
                         <div class="columns-1 sm:columns-2 lg:columns-4 gap-4 md:gap-6 space-y-4 md:space-y-6" id="company1-grid"></div>
                     </div>
 
@@ -884,21 +914,71 @@
         });
 
         // --- Modal Functions ---
-        function openModal(id) {
+        function openModal(id, pdfFilename = null, pdfTitle = "Brand Manual") {
             const modal = document.getElementById(id);
             if (modal) {
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
                 document.body.style.overflow = 'hidden';
-                header.classList.add('hidden'); // Hide header when modal is open
+                header.classList.add('hidden'); 
                 
                 if (id === 'social-media-modal') initSocialMediaGrid();
                 if (id === 'carousel-modal') initCarousels();
                 if (id === 'print-media-modal') initPrintMediaGrid();
                 if (id === 'video-reel-modal') initVideoReelCarousel();
                 if (id === 'ui-ux-modal') initUiUxGrid();
-                if (id === 'logo-modal') initLogoGrid();
                 if (id === 'hobbies-modal') initHobbiesGrid();
+                if (id === 'logo-modal') initLogoGrid();
+                
+                // TRIGGER PDF RENDERER
+                if (id === 'pdf-modal' && pdfFilename) {
+                    document.getElementById('pdf-title').innerText = pdfTitle;
+                    renderPDF(pdfFilename);
+                }
+            }
+        }
+
+        async function renderPDF(filename) {
+            const container = document.getElementById('pdf-render-container');
+            
+            // If it already has pages, don't load it again
+            if (container.children.length > 0 && container.dataset.loadedFile === filename) return;
+            
+            // Show loading state
+            container.innerHTML = '<div class="w-full text-center text-white font-poppins text-xl animate-pulse">Extracting pages from PDF...</div>';
+            container.dataset.loadedFile = filename;
+
+            try {
+                // Fetch the PDF file
+                const loadingTask = pdfjsLib.getDocument(filename);
+                const pdf = await loadingTask.promise;
+                container.innerHTML = ''; // Clear loading text
+
+                // Loop through every page
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    
+                    // Set quality/scale
+                    const viewport = page.getViewport({ scale: 1.5 }); 
+
+                    // Create a canvas for the page
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    
+                    // Style it for horizontal scrolling
+                    canvas.className = 'shrink-0 h-[70vh] w-auto snap-center shadow-2xl rounded-sm bg-white'; 
+
+                    // Draw the page onto the canvas
+                    const renderContext = { canvasContext: ctx, viewport: viewport };
+                    await page.render(renderContext).promise;
+                    
+                    container.appendChild(canvas);
+                }
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                container.innerHTML = '<div class="w-full text-center text-red-400 font-poppins">Failed to load PDF. Make sure the file is uploaded to GitHub and spelled correctly.</div>';
             }
         }
 
