@@ -280,9 +280,9 @@
 
                     <div onclick="openModal('logo-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger">
                         <div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100">
-                            <img src="https://drive.google.com/thumbnail?id=1z5LVszP_cYlsMezFyNLCJfCpkkFexr7c&sz=w1000" alt="Logo Design" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" />
+                            <img src="https://drive.google.com/thumbnail?id=1z5LVszP_cYlsMezFyNLCJfCpkkFexr7c&sz=w1000" alt="Logo Design & Branding" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" />
                         </div>
-                        <h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">Logo Design</h3>
+                        <h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">Logo Design & Branding</h3>
                     </div>
 
                     <!-- Hobbies Card Trigger -->
@@ -591,22 +591,13 @@
         </div>
     </div>
 
-    <div id="pdf-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center bg-black/95 p-4 md:p-8">
-        <div class="absolute inset-0 cursor-pointer" onclick="closeModal('pdf-modal')"></div>
-        
-        <button onclick="closeModal('pdf-modal')" class="absolute top-6 right-6 p-3 bg-white/10 rounded-full hover:bg-white/20 transition-colors cursor-pointer z-[250] group border border-white/10">
-            <i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform"></i>
-        </button>
-
-        <div class="relative w-full h-[85vh] z-[210] flex flex-col">
-            <h2 id="pdf-title" class="text-2xl font-times text-white mb-6 text-center z-[220] pointer-events-none">Brand Manual</h2>
-            
-            <div id="pdf-render-container" class="flex overflow-x-auto gap-6 pb-6 custom-scrollbar snap-x snap-mandatory items-center h-full w-full px-[10vw]">
-                </div>
-            
-            <div class="text-center text-slate-500 font-poppins text-sm mt-4 z-[220] pointer-events-none">Swipe horizontally to read the manual</div>
-        </div>
-    </div>
+    <div class="mb-16">
+                        <h3 class="text-2xl font-manrope text-indigo-400 mb-2">Prolift Systems</h3>
+                        <p class="text-slate-400 text-sm font-poppins mb-6">Swipe horizontally to view the full visual identity manual.</p>
+                        
+                        <div id="prolift-pdf-container" class="flex overflow-x-auto gap-6 pb-6 custom-scrollbar snap-x snap-mandatory items-center w-full min-h-[400px]">
+                            </div>
+                    </div>
 
     <!-- Video and Reel Modal (Cover Flow Style) -->
     <div id="video-reel-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
@@ -914,7 +905,7 @@
         });
 
         // --- Modal Functions ---
-        function openModal(id, pdfFilename = null, pdfTitle = "Brand Manual") {
+        function openModal(id) {
             const modal = document.getElementById(id);
             if (modal) {
                 modal.classList.remove('hidden');
@@ -928,49 +919,39 @@
                 if (id === 'video-reel-modal') initVideoReelCarousel();
                 if (id === 'ui-ux-modal') initUiUxGrid();
                 if (id === 'hobbies-modal') initHobbiesGrid();
-                if (id === 'logo-modal') initLogoGrid();
-                
-                // TRIGGER PDF RENDERER
-                if (id === 'pdf-modal' && pdfFilename) {
-                    document.getElementById('pdf-title').innerText = pdfTitle;
-                    renderPDF(pdfFilename);
+                if (id === 'logo-modal') {
+                    initLogoGrid(); // Loads Company 2 images
+                    renderInlinePDF('prolift-manual.pdf', 'prolift-pdf-container'); // Extracts Prolift PDF
                 }
             }
         }
 
-        async function renderPDF(filename) {
-            const container = document.getElementById('pdf-render-container');
+       async function renderInlinePDF(filename, containerId) {
+            const container = document.getElementById(containerId);
             
-            // If it already has pages, don't load it again
+            // If already loaded, skip
             if (container.children.length > 0 && container.dataset.loadedFile === filename) return;
             
-            // Show loading state
-            container.innerHTML = '<div class="w-full text-center text-white font-poppins text-xl animate-pulse">Extracting pages from PDF...</div>';
+            container.innerHTML = '<div class="w-full text-center text-slate-400 font-poppins animate-pulse py-20">Extracting pages from PDF...</div>';
             container.dataset.loadedFile = filename;
 
             try {
-                // Fetch the PDF file
                 const loadingTask = pdfjsLib.getDocument(filename);
                 const pdf = await loadingTask.promise;
-                container.innerHTML = ''; // Clear loading text
+                container.innerHTML = ''; 
 
-                // Loop through every page
                 for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                     const page = await pdf.getPage(pageNum);
-                    
-                    // Set quality/scale
                     const viewport = page.getViewport({ scale: 1.5 }); 
 
-                    // Create a canvas for the page
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
                     canvas.height = viewport.height;
                     canvas.width = viewport.width;
                     
-                    // Style it for horizontal scrolling
-                    canvas.className = 'shrink-0 h-[70vh] w-auto snap-center shadow-2xl rounded-sm bg-white'; 
+                    // Style it for horizontal scrolling inside the modal
+                    canvas.className = 'shrink-0 h-[50vh] md:h-[60vh] w-auto snap-center shadow-lg rounded-md bg-white border border-white/10'; 
 
-                    // Draw the page onto the canvas
                     const renderContext = { canvasContext: ctx, viewport: viewport };
                     await page.render(renderContext).promise;
                     
@@ -978,9 +959,76 @@
                 }
             } catch (error) {
                 console.error('Error loading PDF:', error);
-                container.innerHTML = '<div class="w-full text-center text-red-400 font-poppins">Failed to load PDF. Make sure the file is uploaded to GitHub and spelled correctly.</div>';
+                container.innerHTML = '<div class="w-full text-center text-red-400 font-poppins py-20">Failed to load PDF. Make sure "prolift-manual.pdf" is uploaded to GitHub.</div>';
             }
         }
+
+        // --- Drag-to-Scroll Logic for Inline PDF Container ---
+        const inlinePdfContainer = document.getElementById('prolift-pdf-container');
+        if (inlinePdfContainer) {
+            let isDownInline = false;
+            let startXInline;
+            let scrollLeftInline;
+
+            inlinePdfContainer.addEventListener('mousedown', (e) => {
+                isDownInline = true;
+                inlinePdfContainer.style.cursor = 'grabbing';
+                inlinePdfContainer.classList.remove('snap-mandatory'); 
+                startXInline = e.pageX - inlinePdfContainer.offsetLeft;
+                scrollLeftInline = inlinePdfContainer.scrollLeft;
+            });
+            inlinePdfContainer.addEventListener('mouseleave', () => {
+                isDownInline = false;
+                inlinePdfContainer.style.cursor = '';
+                inlinePdfContainer.classList.add('snap-mandatory');
+            });
+            inlinePdfContainer.addEventListener('mouseup', () => {
+                isDownInline = false;
+                inlinePdfContainer.style.cursor = '';
+                inlinePdfContainer.classList.add('snap-mandatory');
+            });
+            inlinePdfContainer.addEventListener('mousemove', (e) => {
+                if (!isDownInline) return;
+                e.preventDefault();
+                const x = e.pageX - inlinePdfContainer.offsetLeft;
+                const walk = (x - startXInline) * 2; 
+                inlinePdfContainer.scrollLeft = scrollLeftInline - walk;
+            });
+        }
+        // --- Drag-to-Scroll Logic for PDF Container ---
+        const pdfContainer = document.getElementById('pdf-render-container');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        pdfContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            pdfContainer.style.cursor = 'grabbing';
+            // Disable snapping temporarily so dragging feels smooth
+            pdfContainer.classList.remove('snap-mandatory'); 
+            startX = e.pageX - pdfContainer.offsetLeft;
+            scrollLeft = pdfContainer.scrollLeft;
+        });
+
+        pdfContainer.addEventListener('mouseleave', () => {
+            isDown = false;
+            pdfContainer.style.cursor = '';
+            pdfContainer.classList.add('snap-mandatory');
+        });
+
+        pdfContainer.addEventListener('mouseup', () => {
+            isDown = false;
+            pdfContainer.style.cursor = '';
+            pdfContainer.classList.add('snap-mandatory');
+        });
+
+        pdfContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - pdfContainer.offsetLeft;
+            const walk = (x - startX) * 2; // Multiply by 2 to scroll slightly faster than the mouse moves
+            pdfContainer.scrollLeft = scrollLeft - walk;
+        });
 
         function closeModal(id) {
             const modal = document.getElementById(id);
