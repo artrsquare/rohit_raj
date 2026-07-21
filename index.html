@@ -118,22 +118,6 @@
     </div>
     <div class="noise-overlay"></div>
 
-    </head>
-<body class="bg-black text-slate-200 antialiased selection:bg-indigo-500/30 selection:text-indigo-200 font-poppins relative">
-
-    <div id="desktop-alert" class="fixed top-6 right-6 left-6 sm:left-auto sm:w-80 z-[300] flex items-start gap-3 p-4 bg-[#0f0f0f]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl md:hidden">
-        <div class="p-2 bg-indigo-500/20 rounded-full shrink-0">
-            <i data-lucide="monitor" class="w-5 h-5 text-indigo-400"></i>
-        </div>
-        <div class="flex-1 mt-0.5">
-            <h4 class="text-white font-manrope font-medium text-sm mb-1">Desktop Recommended</h4>
-            <p class="text-slate-400 font-poppins text-xs leading-relaxed">For the best experience exploring the brand manuals and case studies, please view this site on a larger screen.</p>
-        </div>
-        <button onclick="document.getElementById('desktop-alert').style.display='none'" class="p-1 hover:bg-white/10 rounded-full transition-colors shrink-0 group">
-            <i data-lucide="x" class="w-4 h-4 text-slate-400 group-hover:text-white transition-colors"></i>
-        </button>
-    </div>
-
     <!-- Header (Responsive Update: Stacks on mobile) -->
     <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 border-b border-white/5 bg-black/20 backdrop-blur-sm py-4 md:py-6">
         <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
@@ -178,9 +162,34 @@
 
     <main class="relative z-10 pt-32 md:pt-20">
         
-        <!-- Hero Section -->
-        <section class="py-20 md:py-32 flex items-center justify-start px-6 pb-0">
-            <div class="max-w-7xl mx-auto w-full md:pl-10">
+       <!-- Hero Section -->
+        <section class="py-20 md:py-32 flex items-center justify-start px-6 pb-0 md:mt-4">
+            <div class="max-w-7xl mx-auto w-full md:pl-10 relative">
+                
+                <!-- Highly Highlighted Achievement Badge -->
+                <div class="animate-fade-up" style="animation-delay: 0.2s;">
+                    <div class="inline-flex items-center gap-4 bg-gradient-to-r from-amber-500/20 via-orange-500/10 to-transparent border border-amber-500/50 rounded-full py-2.5 px-5 backdrop-blur-md cursor-default hover-trigger mb-8 shadow-[0_0_25px_rgba(245,158,11,0.15)] relative overflow-hidden group">
+                        
+                        <!-- Subtle shine effect on hover -->
+                        <div class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+                        
+                        <!-- Trophy Icon -->
+                        <div class="flex items-center justify-center p-2.5 bg-gradient-to-br from-amber-400 to-orange-600 rounded-full text-white shadow-lg shadow-amber-500/40 relative z-10">
+                            <i data-lucide="trophy" class="w-5 h-5"></i>
+                        </div>
+                        
+                        <!-- Text -->
+                        <div class="pr-3 relative z-10">
+                            <p class="text-amber-400 text-[13px] md:text-sm font-manrope font-extrabold leading-tight tracking-wider uppercase mb-0.5">
+                                PM VISION TO ART WINNER
+                            </p>
+                            <p class="text-slate-200 text-[11px] md:text-xs font-poppins leading-tight">
+                                Department of Cultural Affairs, Govt. of Maharashtra
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Responsive Heading Size -->
                 <h1 class="text-4xl md:text-[62px] text-white mb-6 tracking-tight leading-tight cursor-default" style="font-family: 'Times New Roman', Times, serif;">
                     Hey, I'm <span class="font-bold">Rohit Raj</span> <br/>
@@ -191,6 +200,7 @@
                 </p>
             </div>
         </section>
+
 
         <!-- Case Study Section -->
         <section class="pt-4 pb-16 px-6">
@@ -215,7 +225,7 @@
                     
                     <div onclick="openModal('wall-fabrica-modal')" class="shrink-0 w-[85vw] md:w-[400px] lg:w-[450px] snap-center group cursor-pointer rounded-3xl border border-white/20 p-4 bg-black/50 hover:bg-black/70 transition-colors duration-300 hover-trigger relative z-10 shadow-lg hover:shadow-indigo-500/20 flex flex-col">
                         <div class="bg-gradient-to-br from-slate-700 to-slate-900 rounded-2xl overflow-hidden aspect-[4/3] mb-6 relative w-full flex items-center justify-center">
-                            <img src="https://drive.google.com/thumbnail?id=1-DHS1e0ekBeUZ85gLvtOJY9TmHV9xICh&sz=w1000" alt="Wall Fabrica App Screens" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-500" />
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000&auto=format&fit=crop" alt="Wall Fabrica App Screens" class="object-cover w-full h-full opacity-90 group-hover:scale-105 transition-transform duration-500" />
                         </div>
                         <div class="mt-auto flex justify-between items-end px-2 pb-2">
                             <h3 class="text-xl font-manrope font-medium text-white max-w-[80%] leading-snug">Wall Fabrica – Interior Cost Calculator</h3>
@@ -291,13 +301,6 @@
                         <h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">UI/UX Element</h3>
                     </div>
 
-                    <div onclick="openModal('logo-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger">
-                        <div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100">
-                            <img src="https://drive.google.com/thumbnail?id=1z5LVszP_cYlsMezFyNLCJfCpkkFexr7c&sz=w1000" alt="Logo Design" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" />
-                        </div>
-                        <h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">Logo Design</h3>
-                    </div>
-
                     <!-- Hobbies Card Trigger -->
                     <div onclick="openModal('hobbies-modal')" class="bg-white rounded-2xl p-3 hover:scale-105 transition-transform duration-300 cursor-pointer group hover-trigger"><div class="rounded-xl overflow-hidden aspect-[16/9] mb-3 relative bg-slate-100"><img src="https://drive.google.com/thumbnail?id=1PvKX3AsqeUtMB065JzIM3nV50gT69MIe&sz=w1000" alt="Hobbies" class="object-cover w-full h-full group-hover:opacity-90 transition-opacity" /></div><h3 class="text-slate-900 font-manrope font-medium px-1 text-lg">My Hobbies</h3></div>
                 </div>
@@ -367,7 +370,7 @@
                         <h1 class="text-3xl md:text-5xl font-times text-white mb-10 leading-tight mt-8">Case Study: Wall Fabrica – Interior Cost Calculator</h1>
                         
                         <div class="w-full rounded-2xl overflow-hidden mb-16 border border-white/10 shadow-2xl shadow-black/50 bg-slate-800">
-                            <img src="https://drive.google.com/thumbnail?id=1fztDFSUD8HG3elvuSnq7OYjm1h18UqWU&sz=w1000" alt="Wall Fabrica Hero" class="w-full h-auto object-cover opacity-80" />
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2670&auto=format&fit=crop" alt="Wall Fabrica Hero" class="w-full h-auto object-cover opacity-80" />
                         </div>
                         
                         <section class="mb-16">
@@ -424,11 +427,6 @@
                                 </div>
                             </div>
                         </section>
-                        <div class="my-8 rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-2">
-                            <div class="rounded-xl overflow-hidden">
-                                <img src="https://drive.google.com/thumbnail?id=1HFas0VpIA-FHl8Kr4Op7MnGhzFWZfVqE&sz=w1000" alt="Wall Fabrica Approach" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" />
-                            </div>
-                        </div>
 
                         <section class="mb-16">
                             <h2 class="text-4xl font-times text-white mb-8">4. Design Decisions</h2>
@@ -478,12 +476,6 @@
                                 </div>
                             </div>
                         </section>
-
-                        <div class="my-8 rounded-2xl overflow-hidden border border-white/10 bg-white/5 p-2">
-                            <div class="rounded-xl overflow-hidden">
-                                <img src="https://drive.google.com/thumbnail?id=1fztDFSUD8HG3elvuSnq7OYjm1h18UqWU&sz=w1000" alt="Wall Fabrica Challenges" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" />
-                            </div>
-                        </div>
 
                         <section class="mb-16 border-t border-white/10 pt-12">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -606,7 +598,7 @@
                 
                 <div class="px-6 md:px-10 pb-10 pt-1 -mt-10">
                     <h2 class="text-3xl font-times text-white mb-8 text-left">Print Media</h2>
-                    <div class="columns-1 sm:columns-2 lg:columns-4 gap-4 md:gap-6 space-y-4 md:space-y-6" id="print-media-grid"></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6" id="print-media-grid"></div>
                     <div class="mt-12 text-center text-slate-500 font-poppins text-sm pb-8">
                         High-impact print and digital collateral designed for events and promotions.
                     </div>
@@ -635,33 +627,6 @@
 
                 <div class="mt-8 text-slate-500 font-poppins text-sm pb-8 text-center">
                     Click on a reel to bring it to focus.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="logo-modal" class="fixed inset-0 z-[200] hidden flex items-center justify-center p-4 md:p-8">
-        <div class="absolute inset-0 bg-black/90 backdrop-blur-xl cursor-pointer" onclick="closeModal('logo-modal')"></div>
-        <div class="relative w-full max-w-7xl h-[90vh] bg-[#0f0f0f] rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-zoom-in">
-            <div class="overflow-y-auto custom-scrollbar relative">
-                <div class="sticky top-0 right-0 z-50 flex justify-end p-6 pointer-events-none">
-                    <button onclick="closeModal('logo-modal')" class="pointer-events-auto p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-white/20 transition-colors cursor-pointer group hover-trigger border border-white/10 shadow-lg"><i data-lucide="x" class="w-6 h-6 text-white group-hover:rotate-90 transition-transform duration-300"></i></button>
-                </div>
-                <div class="px-6 md:px-10 pb-10 pt-1 -mt-10">
-                    <h2 class="text-3xl font-times text-white mb-10 text-left">Logo Design & Branding Process</h2>
-                    
-                    <div class="mb-16">
-                        <h3 class="text-2xl font-manrope text-indigo-400 mb-2">Prolift Systems</h3>
-                        <p class="text-slate-400 text-sm mb-6 font-poppins">Initial sketches, grid measurements, and final identity.</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-start" id="company1-grid"></div>
-                    </div>
-
-                    <div class="mb-8">
-                        <h3 class="text-2xl font-manrope text-indigo-400 mb-2">Coming Soon</h3>
-                        <p class="text-slate-400 text-sm mb-6 font-poppins">Initial sketches, grid measurements, and final identity.</p>
-                        <div class="columns-1 sm:columns-2 lg:columns-4 gap-4 md:gap-6 space-y-4 md:space-y-6" id="company2-grid"></div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -789,10 +754,6 @@
         ];
 
         const printMediaImages = [
-            "https://drive.google.com/thumbnail?id=1LXT1qpfA9hGvUE8ZSL-_iJd5UhEvkHJZ&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1dDdEeOJxkBIU2U76YxmGa4v6KkOzjmdp&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1dx3njkl2EKNNvm92E21X2s_2ecPTzH4f&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1dr5zBoVh-6ElKxGJjnuM8UTxtbvKC2Kf&sz=w1000",
             "https://drive.google.com/thumbnail?id=1w2iDZG41dof-GlzLkgCiavrRBVCFfl0x&sz=w1000",
             "https://drive.google.com/thumbnail?id=1ji2AahgMBXQCr2xsfeNKTKnrpYKmH8OW&sz=w1000",
             "https://drive.google.com/thumbnail?id=1kZFl5Alu3F6K5OFBRzKiJwb61Pz-F6rs&sz=w1000",
@@ -809,41 +770,6 @@
             "https://drive.google.com/thumbnail?id=1VSkvi8rCTkyjGPyXjiep_B-_76UPCscI&sz=w1000",
         
         ];
-
-        // Images for the first company (Sketches, measurements, final)
-        const company1Logos = [
-            "https://drive.google.com/thumbnail?id=16q4nuewXX-gJCG1F6BlnOebblZeWp37g&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1ARGUVtR6RMB4nWrPzaWobmc1fbxMnmco&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1Ct-jOGqwTRvz71e0X9oyxozeQe6bJrxy&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1He5UQN2qOGmsqNnvEbUHZt0qCM6phpCP&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1e09sS5I8QEV15J72eMl-5lPIUuPFymDv&sz=w1000",
-            "https://drive.google.com/thumbnail?id=10frsAy6bb6NPKbcRzmQ9p67CeSSoH8ZK&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1tiLliS3fDxwQ6WfGTsP8GWoFezWSHC0n&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1sxn5sYE8mO0zUId244vZ1HhsOtQqC3KV&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1GnQ-yV9GVPGUESowqMn90Lt_xq-IzUll&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1BV-l6yDcCoTZhnQjXShLf9bAIg510UnL&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1YSA9PBWTg18gnVB3Xtla_eWY3RnFoynu&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1U8RePx5fXcPoV-EK5ZlQzqXYM-GGpOsD&sz=w1000",
-            "https://drive.google.com/thumbnail?id=12PHhDg4IvR5IOirmh81fT1J7Q3A6vfsW&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1nUGJt2_SFg8T-zuGuRg7vi_1Q9bG5fPV&sz=w1000",
-            "https://drive.google.com/thumbnail?id=10Nn-RAgjFgzi9kUoWQKOGdxIa1mZmnWW&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1ky-0ulXnWtE71QFUwQRrgOy5LHUS2Y7l&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1igyXqlfpJq2fkvITXTRPOy6xPqwipiEj&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1Mgt3KK_vJwKrB_IPmHr7feuyvsOdAuLW&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1l-ZHLea_r_TkOE7eji2n2gmRNWVqQwa2&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1DzRRqXV5xAt9WxBvuIpE9DxPqBKU297h&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1dT6t4t_zYAWHhEBRPk8skaKjUacQVo4v&sz=w1000",
-            "https://drive.google.com/thumbnail?id=15h-j_E8Izg9k7hnOSEHzhnEpORNBmYhk&sz=w1000",
-            "https://drive.google.com/thumbnail?id=1Vm2GI3lIki6KSPDNMVQwj7ERGGmuEI_L&sz=w1000",
-
-        ];
-
-        // Images for the second company (Sketches, measurements, final)
-        //const company2Logos = [
-        //   "https://drive.google.com/thumbnail?id=1JGQdYyKJOv7ozuWOu9VE1F1NXkrOGaPw&sz=w1000",
-        //   "https://drive.google.com/thumbnail?id=1Q41JHlsMI-RXHATMsgst6ee6Vjcys6-I&sz=w1000",
-        //   "https://drive.google.com/thumbnail?id=1VSkvi8rCTkyjGPyXjiep_B-_76UPCscI&sz=w1000",
-        //];
 
         const hobbiesData = [
             { type: 'image', src: 'https://drive.google.com/thumbnail?id=17hKyzkOyfANStgH2klCsS8EHSWkMc-_W&sz=w1000' },
@@ -944,7 +870,6 @@
                 if (id === 'print-media-modal') initPrintMediaGrid();
                 if (id === 'video-reel-modal') initVideoReelCarousel();
                 if (id === 'ui-ux-modal') initUiUxGrid();
-                if (id === 'logo-modal') initLogoGrid();
                 if (id === 'hobbies-modal') initHobbiesGrid();
             }
         }
@@ -996,24 +921,6 @@
                 `;
                 container.appendChild(div);
             });
-            lucide.createIcons();
-        }
-
-        function initLogoGrid() {
-            const container1 = document.getElementById('company1-grid');
-            const container2 = document.getElementById('company2-grid');
-
-            if (container1 && container1.children.length === 0) {
-                company1Logos.forEach((src) => {
-                    createGridItem(container1, src, "Company 1 Process");
-                });
-            }
-
-            if (container2 && container2.children.length === 0) {
-                company2Logos.forEach((src) => {
-                    createGridItem(container2, src, "Company 2 Process");
-                });
-            }
             lucide.createIcons();
         }
 
